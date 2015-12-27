@@ -1,0 +1,24 @@
+body {
+    width: 500px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.spk-author {
+    font-weight: bold;
+}
+
+.spk-action {
+    font-style: italic;
+}
+
+.spk-comment {
+    color: cornflowerblue;
+}
+
+.spk-where {
+    color: beige;
+}
