@@ -15,7 +15,7 @@ spk.lib = (function () {
     var getFeed = function (callback) {
         var user = github.getUser();
 
-        user.notifications(undefined, callback)
+        user.notifications(undefined, callback);
     };
 
     return {
