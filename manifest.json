@@ -5,10 +5,11 @@
   "version": "1.0",
   "browser_action": {
     "default_icon": "img/icon.png",
-    "default_popup": "views/notification.html"
+    "default_popup": "views/list.html"
   },
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

@@ -14,34 +14,45 @@
 <body>
 
 <div class="container">
-    <p>
+    <h3>Notifications: <span class="spk-quantity">&hellip;</span></h3>
+    <ul id="notifications"></ul>
+</div>
+
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jsrender.min.js"></script>
+
+<script src="../js/github.js"></script>
+<script src="../js/bend/lib.js"></script>
+<script src="../js/fend/templates.js"></script>
+<script src="../js/fend/list.js"></script>
+
+<script id="commentTemplate" type="text/x-jsrender">
+<p>
     <span class="spk-author">
-        <a href="http://github.com/barriosnahuel" target="_blank">Nahuel Barrios</a>
+        <a href="http://github.com/barriosnahuel" target="_blank">{{:user}}</a>
     </span>
         <span class="spk-action">dijo: "</span>
         <span class="spk-comment">deberiamos hacerlo</span><span class="spk-action">" en el issue </span>
     <span class="spk-where">
         <a href="http://github.com/barriosnahuel/issues/123">#123->Deberíamos refactorear la God class?</a>
     </span>
-    </p>
+</p>
 
-    <hr>
 
-    <p>
+</script>
+
+<script id="branchUpdateTemplate" type="text/x-jsrender">
+<p>
     <span class="spk-author">
         <a href="http://github.com/barriosnahuel" target="_blank">Nahuel Barrios</a>
     </span>
-        <span class="spk-action">creo/elimino el branch/tag/release: </span>
-        <span class="spk-comment">feature/blah</span>
-    </p>
-</div>
+    <span class="spk-action">creo/elimino el branch/tag/release: </span>
+    <span class="spk-comment">feature/blah</span>
+</p>
 
-<script src="../js/jquery-2.1.4.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 
-<script src="../js/github.js"></script>
-<script src="../js/bend/lib.js"></script>
-<script src="../js/fend/notification.js"></script>
+</script>
 
 </body>
 </html>
