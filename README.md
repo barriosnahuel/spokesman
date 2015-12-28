@@ -20,4 +20,3 @@ is not present, then it fails and log:
 - https://www.getbootstrap.com
 - https://www.jquery.com
 - https://www.jsviews.com
-- https://github.com/michael/github
