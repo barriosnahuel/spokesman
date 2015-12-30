@@ -13,7 +13,10 @@
     ],
     "background": {
         "scripts": [
-            "js/bend/lib.js",
+            "js/bend/events/issue_comment_event.js",
+            "js/bend/events/push_event.js",
+            "js/bend/events/manager.js",
+            "js/bend/api/lib.js",
             "js/bend/background.js"
         ],
         "persistent": false

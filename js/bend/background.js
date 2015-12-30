@@ -3,6 +3,18 @@
  */
 var spk = spk || {};
 
+chrome.notifications.onClicked.addListener(function (notificationId) {
+    alert('clicked on: ' + notificationId);
+});
+
+chrome.notifications.onClosed.addListener(function (notificationId, byUser) {
+    if (byUser) {
+        console.log('notification %s %s', notificationId, ' closed by the user');
+    } else {
+        console.log('notification %s %s', notificationId, 'closed by the system');
+    }
+});
+
 chrome.alarms.onAlarm.addListener(function (alarm) {
     // Fire requests...
 
@@ -13,40 +25,36 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
         } else {
             console.log('quantity: %d', events.length);
 
+            //var uniqueTypes = [];
+            //for (var i = 0; i < events.length; i++) {
+            //    var anEvent = events[i];
+            //
+            //    if (uniqueTypes.indexOf(anEvent.type) < 0) {
+            //        uniqueTypes.push(anEvent.type);
+            //    }
+            //}
+            //console.dir(uniqueTypes);
+
             for (var i = 0; i < events.length; i++) {
                 var eachEvent = events[i];
 
-                if (eachEvent.type === 'IssueCommentEvent') {
+                var dto = spk.events.manager.parse(eachEvent);
+                if (dto) {
 
+                    var notification = spk.events.manager.buildNotification(dto);
 
-                    var filteredEvent = {
-                        id: eachEvent.id,
-                        type: eachEvent.type,
-                        repo: eachEvent.repo.name.substring(eachEvent.repo.name.indexOf('/') + 1),
-                        actor: {
-                            username: eachEvent.actor.login
-                        },
-                        issue: {
-                            number: eachEvent.payload.issue.number,
-                            title: eachEvent.payload.issue.title
-                        },
-                        payload: {
-                            // IssueCommentEvent
-                            text: eachEvent.payload.comment.body,
-                            url: eachEvent.payload.comment.url
-                        }
-                    };
-
-                    chrome.notifications.create(eachEvent.id, {
+                    var notificationOptions = {
                         type: 'basic',
-                        title: filteredEvent.actor.username + ' said on ' + filteredEvent.issue.title,
-                        message: filteredEvent.payload.text,
-                        contextMessage: filteredEvent.repo + ' | ' + '#' + filteredEvent.issue.number,
+                        title: notification.title,
+                        message: notification.message,
+                        contextMessage: notification.contextMessage,
                         iconUrl: 'img/icon.png'
-                    }, function (notificationId) {
+                    };
+                    chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
                         // Do nothing...
                     });
-
+                } else {
+                    console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
                 }
             }
         }

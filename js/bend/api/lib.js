@@ -9,7 +9,7 @@ spk.lib = (function () {
     };
 
     var getEvents = function (callback) {
-        callback(undefined, []);
+        callback(undefined, response);
     };
 
     return {
