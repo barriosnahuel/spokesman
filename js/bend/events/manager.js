@@ -12,7 +12,7 @@ spk.events.manager = (function () {
         {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent},
         //{id: 'IssuesEvent', event: spk.events.issuesEvent},
         //{id: 'ForkEvent', event: spk.events.forkEvent},
-        //{id: 'PullRequestEvent', event: spk.events.pullRequestEvent},
+        {id: 'PullRequestEvent', event: spk.events.pullRequestEvent},
         //{id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent},
         {id: 'PushEvent', event: spk.events.pushEvent},
         {id: 'ReleaseEvent', event: spk.events.releaseEvent}

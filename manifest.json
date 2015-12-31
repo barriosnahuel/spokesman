@@ -16,6 +16,7 @@
             "js/jquery-2.1.4.min.js",
             "js/bend/events/issue_comment_event.js",
             "js/bend/events/create_event.js",
+            "js/bend/events/pull_request_event.js",
             "js/bend/events/push_event.js",
             "js/bend/events/release_event.js",
             "js/bend/events/manager.js",

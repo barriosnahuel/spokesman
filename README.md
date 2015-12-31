@@ -37,7 +37,7 @@ is not present, then it fails and log:
 - [Firing notifications] PushEvent
  - payload.commits => []
  - payload.ref => "refs/heads/develop"
-- PullRequestEvent
+- [Firing notifications] PullRequestEvent
  - payload.action => "closed"
  - payload.number => 123
  - payload.pull_request.title => "el titulo"
