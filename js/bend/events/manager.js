@@ -15,7 +15,7 @@ spk.events.manager = (function () {
         //{id: 'PullRequestEvent', event: spk.events.pullRequestEvent},
         //{id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent},
         {id: 'PushEvent', event: spk.events.pushEvent},
-        //{id: 'ReleaseEvent', event: spk.events.releaseEvent}
+        {id: 'ReleaseEvent', event: spk.events.releaseEvent}
         //{id: 'WatchEvent', event: spk.events.watchEvent}
     ];
 

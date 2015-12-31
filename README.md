@@ -63,7 +63,7 @@ is not present, then it fails and log:
 - ForkEvent
  - actor.login => "username"
  - repo.name => "user/repo_name"
-- ReleaseEvent
+- [Firing notifications] ReleaseEvent
  - payload.action => "published"
  - payload.release.html_url => "mobile-android/releases/123"
  - payload.release.name => "Release 1.2.3"
