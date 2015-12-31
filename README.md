@@ -71,6 +71,12 @@ is not present, then it fails and log:
  - payload.action => "started"
  - repo.name => "user/repo_name"
 
+## develop and testing
+
+You must create a `local-properties.json` file in the root directory (just next to this file) containing:
+ - `username` <= Your GiHub's username.
+ - `access_token` <= Your personal access token with both `repo` and `notifications` permissions checked. Take a look to [this link](http://lmgtfy.com/?q=github+access+token) ([or this ](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) to create your access token. 
+
 ## used libraries
 
 - https://www.getbootstrap.com

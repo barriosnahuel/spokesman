@@ -10,9 +10,9 @@ spk.lib = (function () {
 
     var getEvents = function (callback) {
         $.ajax({
-            url: 'https://api.github.com/users/barriosnahuel/received_events',
+            url: 'https://api.github.com/users/' + spk.properties.username + '/received_events',
             beforeSend: function (jqXHR) {
-                jqXHR.setRequestHeader('Authorization', 'token ' + 'ACCESS_TOKEN');
+                jqXHR.setRequestHeader('Authorization', 'token ' + spk.properties.access_token);
             }
         }).done(function (data, textStatus, jqXHR) {
             console.log('GitHub\'s API called OK');
