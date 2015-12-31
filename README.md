@@ -86,7 +86,19 @@ is not present, then it fails and log:
 
 You must create a `local-properties.json` file in the root directory (just next to this file) containing:
  - `username` <= Your GiHub's username.
- - `access_token` <= Your personal access token with `repo` permission checked. Take a look to [this link](http://lmgtfy.com/?q=github+access+token) ([or this ](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) to create your access token. 
+ - `access_token` <= Your personal access token with `repo` permission checked. Take a look to [this link](http://lmgtfy.com/?q=github+access+token) ([or this ](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) to create your access token.
+  
+Sample file:
+
+```json
+{
+    "testing": true,
+    "username": "barriosnahuel",
+    "access_token": "<ACCESS_TOKEN>"
+}
+```
+
+**Important:** `testing` flag is important to prevent checking for new events once a minute.
 
 ## Used libraries
 

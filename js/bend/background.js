@@ -62,7 +62,7 @@ $.ajax({
 
     chrome.alarms.create('', {
         when: Date.now(),
-        periodInMinutes: 1
+        periodInMinutes: spk.properties.testing ? undefined : 1
     });
 
 }).fail(function (jqXHR, textStatus, errorThrown) {
