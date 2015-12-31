@@ -7,9 +7,16 @@ spk.events = spk.events || {};
 spk.events.manager = (function () {
 
     var KNOWN_EVENTS = [
-        {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent},
         {id: 'CreateEvent', event: spk.events.createEvent},
-        {id: 'PushEvent', event: spk.events.pushEvent}
+        //{id: 'DeleteEvent', event: spk.events.deleteEvent},
+        {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent},
+        //{id: 'IssuesEvent', event: spk.events.issuesEvent},
+        //{id: 'ForkEvent', event: spk.events.forkEvent},
+        //{id: 'PullRequestEvent', event: spk.events.pullRequestEvent},
+        //{id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent},
+        {id: 'PushEvent', event: spk.events.pushEvent},
+        //{id: 'ReleaseEvent', event: spk.events.releaseEvent}
+        //{id: 'WatchEvent', event: spk.events.watchEvent}
     ];
 
     var findEvent = function (type) {
