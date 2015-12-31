@@ -13,36 +13,26 @@ $.ajax({
 
     chrome.notifications.onClicked.addListener(function (notificationId) {
         alert('clicked on: ' + notificationId);
+
+        // TODO: Search notification data and send user to notification's link.
     });
 
     chrome.notifications.onClosed.addListener(function (notificationId, byUser) {
         if (byUser) {
             console.log('notification %s %s', notificationId, ' closed by the user');
-        } else {
-            console.log('notification %s %s', notificationId, 'closed by the system');
         }
+
+        // TODO: Mark notification as viewed... always?
     });
 
     chrome.alarms.onAlarm.addListener(function (alarm) {
-        // Fire requests...
+        console.log('Checking for new notifications...');
 
         spk.lib.getEvents(function (err, events) {
 
             if (err) {
                 alert('Can\'t get GitHub\'s events: ' + err);
             } else {
-                console.log('quantity: %d', events.length);
-
-                //var uniqueTypes = [];
-                //for (var i = 0; i < events.length; i++) {
-                //    var anEvent = events[i];
-                //
-                //    if (uniqueTypes.indexOf(anEvent.type) < 0) {
-                //        uniqueTypes.push(anEvent.type);
-                //    }
-                //}
-                //console.dir(uniqueTypes);
-
                 for (var i = 0; i < events.length; i++) {
                     var eachEvent = events[i];
 
@@ -56,8 +46,9 @@ $.ajax({
                             title: notification.title,
                             message: notification.message,
                             contextMessage: notification.contextMessage,
-                            iconUrl: 'img/icon.png'
+                            iconUrl: 'img/Octocat.png'
                         };
+
                         chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
                             // Do nothing...
                         });
@@ -70,8 +61,8 @@ $.ajax({
     });
 
     chrome.alarms.create('', {
-        when: Date.now()
-        //periodInMinutes: 0.2
+        when: Date.now(),
+        periodInMinutes: 1
     });
 
 }).fail(function (jqXHR, textStatus, errorThrown) {
