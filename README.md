@@ -15,15 +15,15 @@ is not present, then it fails and log:
   script in the following Content Security Policy directive: "default-src 'self'". Note that
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
   
-## supported events
-- [DONE] IssueCommentEvent (pueden ser en un PR, cuando no es por CR)
+## known events
+- [Firing notifications] IssueCommentEvent (pueden ser en un PR, cuando no es por CR)
  - payload.issue.number => 123
  - payload.issue.title => "hacer algo"
  - payload.action => "created"
  - payload.comment.html_url => "el link al comentario"
  - payload.comment.body => "este es el comentario posta"
  - payload.issue.pull_request => object => si != null ==> es un PR y no un issue
-- [DONE] PushEvent
+- [Firing notifications] PushEvent
  - payload.commits => []
  - payload.ref => "refs/heads/develop"
 - PullRequestEvent
@@ -38,7 +38,7 @@ is not present, then it fails and log:
 - DeleteEvent
  - payload.ref_type => "branch"
  - payload.ref => "release-test (el nombre de mi branch)"
-- CreateEvent
+- [Firing notifications] CreateEvent
     TAG
  - payload.ref_type => "tag"
  - payload.ref => "v1.2.3-alpha"
