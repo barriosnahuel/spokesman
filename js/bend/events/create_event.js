@@ -17,7 +17,7 @@ spk.events.createEvent = (function () {
                 break;
             case 'tag':
                 result = {
-                    commitsQuantity: event.payload.commits.length,
+                    commitsQuantity: event.payload.commits ? event.payload.commits.length : undefined,
                     branch: event.payload.ref
                 };
                 break;
