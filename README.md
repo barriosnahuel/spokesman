@@ -7,7 +7,8 @@ It's a GitHub's notifications interpreter for Chrome
 2. Open Chrome and go to `chrome://extensions`
 3. Assure **Developer mode** is checked, if not then check it.
 4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
-5. Now simply click on the octocat at the top-right corner of the browser and configure your username and your personal access token ([HowTo](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) with `notifications` and `repo` permissions enabled.
+5. Go to **Develop and testing** section at the end of this file.
+5. [Still in development] Now simply click on the octocat at the top-right corner of the browser and configure your username and your personal access token ([HowTo](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) with `notifications` and `repo` permissions enabled.
 
 **Important:** Take into account that for private repos your access token *must* have the `repo` permission enabled.
 
