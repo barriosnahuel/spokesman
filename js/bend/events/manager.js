@@ -8,6 +8,7 @@ spk.events.manager = (function () {
 
     var KNOWN_EVENTS = [
         {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent},
+        {id: 'CreateEvent', event: spk.events.createEvent},
         {id: 'PushEvent', event: spk.events.pushEvent}
     ];
 

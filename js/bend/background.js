@@ -21,7 +21,7 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
     spk.lib.getEvents(function (err, events) {
 
         if (err) {
-            alert('Can\'t get GitHub\'s events');
+            alert('Can\'t get GitHub\'s events: ' + err);
         } else {
             console.log('quantity: %d', events.length);
 

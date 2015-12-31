@@ -16,14 +16,14 @@ is not present, then it fails and log:
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
   
 ## supported events
-- IssueCommentEvent (pueden ser en un PR, cuando no es por CR)
+- [DONE] IssueCommentEvent (pueden ser en un PR, cuando no es por CR)
  - payload.issue.number => 123
  - payload.issue.title => "hacer algo"
  - payload.action => "created"
  - payload.comment.html_url => "el link al comentario"
  - payload.comment.body => "este es el comentario posta"
  - payload.issue.pull_request => object => si != null ==> es un PR y no un issue
-- PushEvent
+- [DONE] PushEvent
  - payload.commits => []
  - payload.ref => "refs/heads/develop"
 - PullRequestEvent
@@ -39,9 +39,19 @@ is not present, then it fails and log:
  - payload.ref_type => "branch"
  - payload.ref => "release-test (el nombre de mi branch)"
 - CreateEvent
+    TAG
  - payload.ref_type => "tag"
  - payload.ref => "v1.2.3-alpha"
  - payload.master_branch => "develop"
+    REPOSITORY
+ - repo.name => "user/repo_name"
+ - payload.ref_type => "repository"
+ - payload.description => "blah"
+    BRANCH
+ - payload.ref => "branch name"
+- ForkEvent
+ - actor.login => "username"
+ - repo.name => "user/repo_name"
 - ReleaseEvent
  - payload.action => "published"
  - payload.release.html_url => "mobile-android/releases/123"
@@ -57,6 +67,9 @@ is not present, then it fails and log:
  - payload.issue.title => "agregar checkstyle"
  - payload.issue.html_url => "el link"
  - payload.issue.number => 123"
+- WatchEvent
+ - payload.action => "started"
+ - repo.name => "user/repo_name"
 
 ## used libraries
 
