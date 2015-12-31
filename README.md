@@ -1,7 +1,17 @@
 # spokesman
 It's a GitHub's notifications interpreter for Chrome
 
-## manifest notes
+## Use it
+
+1. Clone this repo in your favourite directory.
+2. Open Chrome and go to `chrome://extensions`
+3. Assure **Developer mode** is checked, if not then check it.
+4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
+5. Now simply click on the octocat at the top-right corner of the browser and configure your username and your personal access token ([HowTo](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) with `notifications` and `repo` permissions enabled.
+
+**Important:** Take into account that for private repos your access token *must* have the `repo` permission enabled.
+
+## Manifest notes
 
 ### content_security_policy
 
@@ -15,7 +25,7 @@ is not present, then it fails and log:
   script in the following Content Security Policy directive: "default-src 'self'". Note that
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
   
-## known events
+## Known events
 - [Firing notifications] IssueCommentEvent (pueden ser en un PR, cuando no es por CR)
  - payload.issue.number => 123
  - payload.issue.title => "hacer algo"
@@ -71,13 +81,13 @@ is not present, then it fails and log:
  - payload.action => "started"
  - repo.name => "user/repo_name"
 
-## develop and testing
+## Develop and testing
 
 You must create a `local-properties.json` file in the root directory (just next to this file) containing:
  - `username` <= Your GiHub's username.
  - `access_token` <= Your personal access token with both `repo` and `notifications` permissions checked. Take a look to [this link](http://lmgtfy.com/?q=github+access+token) ([or this ](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) to create your access token. 
 
-## used libraries
+## Used libraries
 
 - https://www.getbootstrap.com
 - https://www.jquery.com
