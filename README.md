@@ -34,7 +34,7 @@ The following events are those ones that are firing desktop notifications right 
 - IssueCommentEvent
 - PullRequestEvent
 - PushEvent
-- ReleaseEventMi
+- ReleaseEvent
 
 To see the full list of events published by the GitHub API take a look to [this link](https://developer.github.com/v3/activity/events/types/).
 
