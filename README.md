@@ -31,7 +31,9 @@ is not present, then it fails and log:
 The following events are those ones that are firing desktop notifications right now. We are working hard to add more events as soon as possible!
 
 - CreateEvent
+- DeleteEvent
 - IssueCommentEvent
+- IssuesEvent
 - PullRequestEvent
 - PushEvent
 - ReleaseEvent
