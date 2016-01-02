@@ -22,6 +22,7 @@
             "js/bend/events/delete_event.js",
             "js/bend/events/issues_event.js",
             "js/bend/events/pull_request_event.js",
+            "js/bend/events/pull_request_review_comment_event.js",
             "js/bend/events/push_event.js",
             "js/bend/events/release_event.js",
             "js/bend/events/manager.js",

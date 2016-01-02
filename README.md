@@ -35,6 +35,7 @@ The following events are those ones that are firing desktop notifications right 
 - IssueCommentEvent
 - IssuesEvent
 - PullRequestEvent
+- PullRequestReviewCommentEvent
 - PushEvent
 - ReleaseEvent
 

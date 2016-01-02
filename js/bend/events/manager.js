@@ -24,7 +24,7 @@ spk.events.manager = (function () {
         //, {id: 'PageBuildEvent', event: spk.events.pageBuildEvent}
         //, {id: 'PublicEvent', event: spk.events.publicEvent}
         , {id: 'PullRequestEvent', event: spk.events.pullRequestEvent}
-        //, {id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent}
+        , {id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent}
         , {id: 'PushEvent', event: spk.events.pushEvent}
         , {id: 'ReleaseEvent', event: spk.events.releaseEvent}
         //, {id: 'RepositoryEvent', event: spk.events.repositoryEvent}
