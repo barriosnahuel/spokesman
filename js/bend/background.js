@@ -17,6 +17,8 @@ $.ajax({
             if (data[notificationId]) {
                 chrome.tabs.create({
                     url: data[notificationId]
+                }, function () {
+                    chrome.notifications.clear(notificationId);
                 });
             }
         });
