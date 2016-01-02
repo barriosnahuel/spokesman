@@ -13,7 +13,8 @@ spk.events.pullRequestEvent = (function () {
             title: event.payload.pull_request.title,
             number: event.payload.number,
             additions: event.payload.pull_request.additions,
-            deletions: event.payload.pull_request.deletions
+            deletions: event.payload.pull_request.deletions,
+            author: event.payload.pull_request.user.login
         };
     };
 
@@ -21,7 +22,7 @@ spk.events.pullRequestEvent = (function () {
         var action = dto.payload.action === 'closed' && dto.payload.merged ? 'merged' : dto.payload.action;
 
         return {
-            title: 'PR ' + action + ' by ' + dto.actor.username,
+            title: 'PR from ' + dto.payload.author + ' ' + action + ' by ' + dto.actor.username,
             message: dto.payload.title,
             contextMessage: dto.repo + ' | ' + '#' + dto.payload.number + ' | +' + dto.payload.additions + '/-' + dto.payload.deletions
         };
