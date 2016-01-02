@@ -11,6 +11,7 @@ spk.events.issuesEvent = (function () {
             action: event.payload.action
             , title: event.payload.issue.title
             , number: event.payload.issue.number
+            , link: event.payload.issue.html_url
         };
     };
 
@@ -26,6 +27,7 @@ spk.events.issuesEvent = (function () {
                 dto.repo
                 , '#' + dto.payload.number
             ])
+            , link: dto.payload.link
         };
     };
 

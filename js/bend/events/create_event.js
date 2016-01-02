@@ -13,16 +13,19 @@ spk.events.createEvent = (function () {
             case 'repository':
                 result = {
                     description: event.payload.description
+                    , link: 'https://github.com/' + event.repo.name
                 };
                 break;
             case 'tag':
                 result = {
                     branch: event.payload.ref
+                    , link: 'https://github.com/' + event.repo.name + '/releases/' + event.payload.ref
                 };
                 break;
             case 'branch':
                 result = {
                     branch: event.payload.ref
+                    , link: 'https://github.com/' + event.repo.name + '/tree/' + event.payload.ref
                 };
                 break;
             default:
@@ -46,6 +49,7 @@ spk.events.createEvent = (function () {
                     , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
+                    , link: dto.payload.link
                 };
                 break;
             case 'tag':
@@ -55,6 +59,7 @@ spk.events.createEvent = (function () {
                     , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
+                    , link: dto.payload.link
                 };
                 break;
             case 'branch':
@@ -64,6 +69,7 @@ spk.events.createEvent = (function () {
                     , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
+                    , link: dto.payload.link
                 };
                 break;
             default:

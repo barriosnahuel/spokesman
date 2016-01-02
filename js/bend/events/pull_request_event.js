@@ -15,6 +15,7 @@ spk.events.pullRequestEvent = (function () {
             , additions: event.payload.pull_request.additions
             , deletions: event.payload.pull_request.deletions
             , author: '@' + event.payload.pull_request.user.login
+            , link: event.payload.pull_request.html_url
         };
     };
 
@@ -29,6 +30,7 @@ spk.events.pullRequestEvent = (function () {
                 , '#' + dto.payload.number
                 , '+' + dto.payload.additions + '/-' + dto.payload.deletions
             ])
+            , link: dto.payload.link
         };
     };
 

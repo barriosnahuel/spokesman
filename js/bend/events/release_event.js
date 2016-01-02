@@ -11,6 +11,7 @@ spk.events.releaseEvent = (function () {
             action: event.payload.action
             , name: event.payload.release.name
             , tag: event.payload.release.tag_name
+            , link: event.payload.release.html_url
         };
     };
 
@@ -23,6 +24,7 @@ spk.events.releaseEvent = (function () {
                 dto.repo
                 , 'Tag: ' + dto.payload.tag
             ])
+            , link: dto.payload.link
         };
     };
 

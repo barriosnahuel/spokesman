@@ -12,25 +12,28 @@ $.ajax({
     spk.properties = properties;
 
     chrome.notifications.onClicked.addListener(function (notificationId) {
-        alert('clicked on: ' + notificationId);
+        chrome.storage.local.get(notificationId, function (data) {
 
-        // TODO: Search notification data and send user to notification's link.
+            if (data[notificationId]) {
+                chrome.tabs.create({
+                    url: data[notificationId]
+                });
+            }
+        });
     });
 
     chrome.notifications.onClosed.addListener(function (notificationId, byUser) {
         if (byUser) {
             console.log('notification %s %s', notificationId, ' closed by the user');
-        }
 
-        // TODO: Mark notification as viewed... always?
+            chrome.storage.local.remove(notificationId, undefined);
+        }
     });
 
     var syncLastEventRead = function (event) {
         console.log('Last event read %s', event.id);
 
-        chrome.storage.sync.set({'lastEventId': event.id}, function () {
-            // Do nothing?
-        });
+        chrome.storage.sync.set({'lastEventId': event.id}, undefined);
     };
 
     /**
@@ -39,8 +42,8 @@ $.ajax({
      * @param next
      */
     var isNotRead = function (eachEvent, next) {
-        chrome.storage.sync.get('lastEventId', function (items) {
-            if (!items.lastEventId || eachEvent.id > items.lastEventId) {
+        chrome.storage.sync.get('lastEventId', function (data) {
+            if (!data.lastEventId || eachEvent.id > data.lastEventId) {
                 next(eachEvent);
             }
         });
@@ -71,7 +74,9 @@ $.ajax({
                             };
 
                             chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
-                                // Do nothing...
+                                var options = {};
+                                options[notificationId] = notification.link;
+                                chrome.storage.local.set(options);
                             });
                         } else {
                             console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);

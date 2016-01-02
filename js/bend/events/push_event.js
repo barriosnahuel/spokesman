@@ -7,9 +7,11 @@ spk.events = spk.events || {};
 spk.events.pushEvent = (function () {
 
     var parseGitHubEvent = function (event) {
+        var branch = event.payload.ref.substring('refs/heads/'.length);
         return {
             commitsQuantity: event.payload.size
-            , branch: event.payload.ref.substring('refs/heads/'.length)
+            , branch: branch
+            , link: 'https://github.com/' + event.repo.name + '/commits/' + branch
         };
     };
 
@@ -24,6 +26,7 @@ spk.events.pushEvent = (function () {
             , contextMessage: spk.util.buildNotificationContext([
                 dto.repo
             ])
+            , link: dto.payload.link
         };
     };
 

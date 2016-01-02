@@ -9,7 +9,7 @@ spk.events.issueCommentEvent = (function () {
     var parseGitHubEvent = function (event) {
         return {
             text: event.payload.comment.body
-            , url: event.payload.comment.html_url
+            , link: event.payload.comment.html_url
             , issue: {
                 number: event.payload.issue.number
                 , title: event.payload.issue.title
@@ -25,6 +25,7 @@ spk.events.issueCommentEvent = (function () {
                 dto.repo
                 , '#' + dto.payload.issue.number
             ])
+            , link: dto.payload.link
         };
     };
 

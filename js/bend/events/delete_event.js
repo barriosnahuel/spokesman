@@ -10,6 +10,7 @@ spk.events.deleteEvent = (function () {
         return {
             branch: event.payload.ref
             , type: event.payload.ref_type
+            , link: 'https://github.com/' + event.repo.name + (event.payload.ref_type === 'tag' ? '/tags' : '/branches')
         };
     };
 
@@ -24,6 +25,7 @@ spk.events.deleteEvent = (function () {
                     , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
+                    , link: dto.payload.link
                 };
                 break;
             case 'branch':
@@ -33,6 +35,7 @@ spk.events.deleteEvent = (function () {
                     , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
+                    , link: dto.payload.link
                 };
                 break;
             default:
