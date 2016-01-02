@@ -14,7 +14,7 @@ spk.events.pullRequestEvent = (function () {
             , number: event.payload.number
             , additions: event.payload.pull_request.additions
             , deletions: event.payload.pull_request.deletions
-            , author: event.payload.pull_request.user.login
+            , author: '@' + event.payload.pull_request.user.login
         };
     };
 

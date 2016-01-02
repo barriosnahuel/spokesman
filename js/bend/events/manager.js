@@ -56,7 +56,7 @@ spk.events.manager = (function () {
             type: event.type,
             repo: event.repo.name.substring(event.repo.name.indexOf('/') + 1),
             actor: {
-                username: event.actor.login
+                username: '@' + event.actor.login
             }
         };
     };
