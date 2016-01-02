@@ -45,6 +45,7 @@ You must create a `local-properties.json` file in the root directory (just next 
  - `username` <= Your GiHub's username.
  - `access_token` <= Your personal access token with `repo` permission checked. Take a look to [this link](http://lmgtfy.com/?q=github+access+token) ([or this ](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)) to create your access token.
  - `push_branches` <= Whitelist with branches that fire notifications after any `PushEvent`.
+ - `issue_actions` <= Whitelist with actions over issues that fire notifications after any `IssuesEvent`. See `action` [here](https://developer.github.com/v3/activity/events/types/#issuesevent) for more information.
   
 Sample file:
 
@@ -57,6 +58,11 @@ Sample file:
         "master",
         "develop",
         "development"
+    ],
+    "issues_action": [
+        "opened",
+        "closed",
+        "reopened"
     ]
 }
 ```

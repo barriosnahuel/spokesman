@@ -4,25 +4,27 @@
 var spk = spk || {};
 spk.events = spk.events || {};
 
-spk.events.pushEvent = (function () {
+spk.events.issuesEvent = (function () {
 
     var parseGitHubEvent = function (event) {
         return {
-            commitsQuantity: event.payload.size
-            , branch: event.payload.ref.substring('refs/heads/'.length)
+            action: event.payload.action
+            , title: event.payload.issue.title
+            , number: event.payload.issue.number
         };
     };
 
     var shouldProcess = function (dto) {
-        return !spk.properties.push_branches || spk.properties.push_branches.indexOf(dto.payload.branch) >= 0;
+        return !spk.properties.issues_action || spk.properties.issues_action.indexOf(dto.payload.action) >= 0;
     };
 
     var buildNotification = function (dto) {
         return {
-            title: dto.payload.commitsQuantity + (dto.payload.commitsQuantity === 1 ? ' commit' : ' commits') + ' pushed by ' + dto.actor.username
-            , message: 'on branch ' + dto.payload.branch
+            title: 'Issue ' + dto.payload.action + ' by ' + dto.actor.username
+            , message: dto.payload.title
             , contextMessage: spk.util.buildNotificationContext([
                 dto.repo
+                , '#' + dto.payload.number
             ])
         };
     };

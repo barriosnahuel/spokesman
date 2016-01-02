@@ -6,31 +6,31 @@ spk.events = spk.events || {};
 
 spk.events.manager = (function () {
     var KNOWN_EVENTS = [
-        //{id: 'CommitCommentEvent', event: spk.events.commitCommentEvent},
-        {id: 'CreateEvent', event: spk.events.createEvent},
-        //{id: 'DeleteEvent', event: spk.events.deleteEvent},
-        //{id: 'DeploymentEvent', event: spk.events.deploymentEvent},
-        //{id: 'DeploymentStatusEvent', event: spk.events.deploymentStatusEvent},
-        //{id: 'DownloadEvent', event: spk.events.downloadEvent},
-        //{id: 'FollowEvent', event: spk.events.followEvent},
-        //{id: 'ForkEvent', event: spk.events.forkEvent},
-        //{id: 'ForkApplyEvent', event: spk.events.forkApplyEvent},
-        //{id: 'GistEvent', event: spk.events.gistEvent},
-        //{id: 'GollumEvent', event: spk.events.gollumEvent},
-        {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent},
-        //{id: 'IssuesEvent', event: spk.events.issuesEvent},
-        //{id: 'MemberEvent', event: spk.events.memberEvent},
-        //{id: 'MembershipEvent', event: spk.events.membershipEvent},
-        //{id: 'PageBuildEvent', event: spk.events.pageBuildEvent},
-        //{id: 'PublicEvent', event: spk.events.publicEvent},
-        {id: 'PullRequestEvent', event: spk.events.pullRequestEvent},
-        //{id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent},
-        {id: 'PushEvent', event: spk.events.pushEvent},
-        {id: 'ReleaseEvent', event: spk.events.releaseEvent}
-        //{id: 'RepositoryEvent', event: spk.events.repositoryEvent},
-        //{id: 'StatusEvent', event: spk.events.statusEvent},
-        //{id: 'TeamAddEvent', event: spk.events.teamAddEvent},
-        //{id: 'WatchEvent', event: spk.events.watchEvent}
+        //, {id: 'CommitCommentEvent', event: spk.events.commitCommentEvent}
+        {id: 'CreateEvent', event: spk.events.createEvent}
+        //, {id: 'DeleteEvent', event: spk.events.deleteEvent}
+        //, {id: 'DeploymentEvent', event: spk.events.deploymentEvent}
+        //, {id: 'DeploymentStatusEvent', event: spk.events.deploymentStatusEvent}
+        //, {id: 'DownloadEvent', event: spk.events.downloadEvent}
+        //, {id: 'FollowEvent', event: spk.events.followEvent}
+        //, {id: 'ForkEvent', event: spk.events.forkEvent}
+        //, {id: 'ForkApplyEvent', event: spk.events.forkApplyEvent}
+        //, {id: 'GistEvent', event: spk.events.gistEvent}
+        //, {id: 'GollumEvent', event: spk.events.gollumEvent}
+        , {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent}
+        , {id: 'IssuesEvent', event: spk.events.issuesEvent}
+        //, {id: 'MemberEvent', event: spk.events.memberEvent}
+        //, {id: 'MembershipEvent', event: spk.events.membershipEvent}
+        //, {id: 'PageBuildEvent', event: spk.events.pageBuildEvent}
+        //, {id: 'PublicEvent', event: spk.events.publicEvent}
+        , {id: 'PullRequestEvent', event: spk.events.pullRequestEvent}
+        //, {id: 'PullRequestReviewCommentEvent', event: spk.events.pullRequestReviewCommentEvent}
+        , {id: 'PushEvent', event: spk.events.pushEvent}
+        , {id: 'ReleaseEvent', event: spk.events.releaseEvent}
+        //, {id: 'RepositoryEvent', event: spk.events.repositoryEvent}
+        //, {id: 'StatusEvent', event: spk.events.statusEvent}
+        //, {id: 'TeamAddEvent', event: spk.events.teamAddEvent}
+        //, {id: 'WatchEvent', event: spk.events.watchEvent}
     ];
 
     var findEvent = function (type) {

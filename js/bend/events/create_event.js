@@ -17,8 +17,8 @@ spk.events.createEvent = (function () {
                 break;
             case 'tag':
                 result = {
-                    commitsQuantity: event.payload.commits ? event.payload.commits.length : undefined,
-                    branch: event.payload.ref
+                    commitsQuantity: event.payload.commits ? event.payload.commits.length : undefined
+                    , branch: event.payload.ref
                 };
                 break;
             case 'branch':
@@ -42,27 +42,27 @@ spk.events.createEvent = (function () {
         switch (dto.payload.type) {
             case 'repository':
                 result = {
-                    title: 'New repository: ' + dto.repo + ' by ' + dto.actor.username,
-                    message: dto.payload.description,
-                    contextMessage: spk.util.buildNotificationContext([
+                    title: 'New repository: ' + dto.repo + ' by ' + dto.actor.username
+                    , message: dto.payload.description
+                    , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
                 };
                 break;
             case 'tag':
                 result = {
-                    title: 'New tag: ' + dto.payload.branch,
-                    message: 'from branch ' + dto.payload.branch,
-                    contextMessage: spk.util.buildNotificationContext([
+                    title: 'New tag: ' + dto.payload.branch
+                    , message: 'from branch ' + dto.payload.branch
+                    , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
                 };
                 break;
             case 'branch':
                 result = {
-                    title: 'New branch: ' + dto.payload.branch,
-                    message: 'By ' + dto.actor.username,
-                    contextMessage: spk.util.buildNotificationContext([
+                    title: 'New branch: ' + dto.payload.branch
+                    , message: 'By ' + dto.actor.username
+                    , contextMessage: spk.util.buildNotificationContext([
                         dto.repo
                     ])
                 };

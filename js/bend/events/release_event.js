@@ -8,18 +8,18 @@ spk.events.releaseEvent = (function () {
 
     var parseGitHubEvent = function (event) {
         return {
-            action: event.payload.action,
-            name: event.payload.release.name,
-            tag: event.payload.release.tag_name
+            action: event.payload.action
+            , name: event.payload.release.name
+            , tag: event.payload.release.tag_name
         };
     };
 
     var buildNotification = function (dto) {
 
         return {
-            title: 'Release ' + dto.payload.action + ' by ' + dto.actor.username,
-            message: dto.payload.name,
-            contextMessage: spk.util.buildNotificationContext([
+            title: 'Release ' + dto.payload.action + ' by ' + dto.actor.username
+            , message: dto.payload.name
+            , contextMessage: spk.util.buildNotificationContext([
                 dto.repo
                 , 'Tag: ' + dto.payload.tag
             ])
