@@ -88,8 +88,16 @@ spk.events.manager = (function () {
         return findEvent(dto.type).buildNotification(dto);
     };
 
+    var shouldProcess = function (dto) {
+        var event = findEvent(dto.type);
+
+        // !event.shouldProcess because the function may not exist in many events.
+        return !event.shouldProcess || event.shouldProcess(dto);
+    };
+
     return {
         parse: parse,
+        shouldProcess: shouldProcess,
         buildNotification: buildNotification
     };
 }());

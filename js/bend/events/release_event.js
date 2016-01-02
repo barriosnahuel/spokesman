@@ -19,7 +19,10 @@ spk.events.releaseEvent = (function () {
         return {
             title: 'Release ' + dto.payload.action + ' by ' + dto.actor.username,
             message: dto.payload.name,
-            contextMessage: dto.repo + ' | ' + 'Tag: ' + dto.payload.tag
+            contextMessage: spk.util.buildNotificationContext([
+                dto.repo
+                , 'Tag: ' + dto.payload.tag
+            ])
         };
     };
 

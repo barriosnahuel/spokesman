@@ -22,9 +22,13 @@ spk.events.pullRequestEvent = (function () {
         var action = dto.payload.action === 'closed' && dto.payload.merged ? 'merged' : dto.payload.action;
 
         return {
-            title: 'PR from ' + dto.payload.author + ' ' + action + ' by ' + dto.actor.username,
+            title: 'PR ' + action + ' by ' + dto.actor.username,
             message: dto.payload.title,
-            contextMessage: dto.repo + ' | ' + '#' + dto.payload.number + ' | +' + dto.payload.additions + '/-' + dto.payload.deletions
+            contextMessage: spk.util.buildNotificationContext([
+                dto.repo
+                , '#' + dto.payload.number
+                , '+' + dto.payload.additions + '/-' + dto.payload.deletions
+            ])
         };
     };
 

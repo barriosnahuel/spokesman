@@ -59,8 +59,7 @@ $.ajax({
 
                     isNotRead(eachEvent, function (eachEvent) {
                         var dto = spk.events.manager.parse(eachEvent);
-                        if (dto) {
-
+                        if (dto && spk.events.manager.shouldProcess(dto)) {
                             var notification = spk.events.manager.buildNotification(dto);
 
                             var notificationOptions = {

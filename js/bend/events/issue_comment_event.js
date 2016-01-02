@@ -21,7 +21,10 @@ spk.events.issueCommentEvent = (function () {
         return {
             title: dto.actor.username + ' said on ' + dto.payload.issue.title,
             message: dto.payload.text,
-            contextMessage: dto.repo + ' | ' + '#' + dto.payload.issue.number
+            contextMessage: spk.util.buildNotificationContext([
+                dto.repo
+                , '#' + dto.payload.issue.number
+            ])
         };
     };
 

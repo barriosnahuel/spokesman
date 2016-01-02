@@ -42,23 +42,29 @@ spk.events.createEvent = (function () {
         switch (dto.payload.type) {
             case 'repository':
                 result = {
-                    title: dto.actor.username + ' created repository: ' + dto.repo,
+                    title: 'New repository: ' + dto.repo + ' by ' + dto.actor.username,
                     message: dto.payload.description,
-                    contextMessage: undefined
+                    contextMessage: spk.util.buildNotificationContext([
+                        dto.repo
+                    ])
                 };
                 break;
             case 'tag':
                 result = {
-                    title: dto.actor.username + ' pushed ' + dto.payload.commitsQuantity + (dto.payload.commitsQuantity === 1 ? ' commit' : ' commits'),
-                    message: 'on branch ' + dto.payload.branch,
-                    contextMessage: undefined
+                    title: 'New tag: ' + dto.payload.branch,
+                    message: 'from branch ' + dto.payload.branch,
+                    contextMessage: spk.util.buildNotificationContext([
+                        dto.repo
+                    ])
                 };
                 break;
             case 'branch':
                 result = {
-                    title: dto.actor.username + ' created branch: ' + dto.payload.branch,
-                    message: 'on repo ' + dto.repo,
-                    contextMessage: undefined
+                    title: 'New branch: ' + dto.payload.branch,
+                    message: 'By ' + dto.actor.username,
+                    contextMessage: spk.util.buildNotificationContext([
+                        dto.repo
+                    ])
                 };
                 break;
             default:

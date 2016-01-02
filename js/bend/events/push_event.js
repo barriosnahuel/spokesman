@@ -8,21 +8,28 @@ spk.events.pushEvent = (function () {
 
     var parseGitHubEvent = function (event) {
         return {
-            commitsQuantity: event.payload.commits.length,
-            branch: event.payload.ref
+            commitsQuantity: event.payload.size,
+            branch: event.payload.ref.substring('refs/heads/'.length)
         };
+    };
+
+    var shouldProcess = function (dto) {
+        return !spk.properties.push_branches || spk.properties.push_branches.indexOf(dto.payload.branch) >= 0;
     };
 
     var buildNotification = function (dto) {
         return {
-            title: dto.actor.username + ' pushed ' + dto.payload.commitsQuantity + (dto.payload.commitsQuantity === 1 ? ' commit' : ' commits'),
+            title: dto.payload.commitsQuantity + (dto.payload.commitsQuantity === 1 ? ' commit' : ' commits') + ' pushed by ' + dto.actor.username,
             message: 'on branch ' + dto.payload.branch,
-            contextMessage: undefined
+            contextMessage: spk.util.buildNotificationContext([
+                dto.repo
+            ])
         };
     };
 
     return {
         parse: parseGitHubEvent,
+        shouldProcess: shouldProcess,
         buildNotification: buildNotification
     };
 }());
