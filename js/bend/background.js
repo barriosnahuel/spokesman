@@ -25,6 +25,27 @@ $.ajax({
         // TODO: Mark notification as viewed... always?
     });
 
+    var syncLastEventRead = function (event) {
+        console.log('Last event read %s', event.id);
+
+        chrome.storage.sync.set({'lastEventId': event.id}, function () {
+            // Do nothing?
+        });
+    };
+
+    /**
+     *
+     * @param eachEvent
+     * @param next
+     */
+    var isNotRead = function (eachEvent, next) {
+        chrome.storage.sync.get('lastEventId', function (items) {
+            if (!items.lastEventId || eachEvent.id > items.lastEventId) {
+                next(eachEvent);
+            }
+        });
+    };
+
     chrome.alarms.onAlarm.addListener(function (alarm) {
         console.log('Checking for new notifications...');
 
@@ -33,32 +54,42 @@ $.ajax({
             if (err) {
                 alert('Can\'t get GitHub\'s events: ' + err);
             } else {
-                for (var i = 0; i < events.length; i++) {
+                for (var i = events.length - 1; i >= 0; i--) {
                     var eachEvent = events[i];
 
-                    var dto = spk.events.manager.parse(eachEvent);
-                    if (dto) {
+                    isNotRead(eachEvent, function (eachEvent) {
+                        var dto = spk.events.manager.parse(eachEvent);
+                        if (dto) {
 
-                        var notification = spk.events.manager.buildNotification(dto);
+                            var notification = spk.events.manager.buildNotification(dto);
 
-                        var notificationOptions = {
-                            type: 'basic',
-                            title: notification.title,
-                            message: notification.message,
-                            contextMessage: notification.contextMessage,
-                            iconUrl: 'img/Octocat.png'
-                        };
+                            var notificationOptions = {
+                                type: 'basic',
+                                title: notification.title,
+                                message: notification.message,
+                                contextMessage: notification.contextMessage,
+                                iconUrl: 'img/Octocat.png'
+                            };
 
-                        chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
-                            // Do nothing...
-                        });
-                    } else {
-                        console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
-                    }
+                            chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
+                                // Do nothing...
+                            });
+                        } else {
+                            console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
+                        }
+                    });
+                    Last
+                    e
                 }
+
+                syncLastEventRead(events[0]);
             }
         });
     });
+
+    if (spk.properties.testing) {
+        chrome.storage.sync.clear();
+    }
 
     chrome.alarms.create('', {
         when: Date.now(),

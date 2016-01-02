@@ -9,7 +9,8 @@
     },
     "permissions": [
         "alarms",
-        "notifications"
+        "notifications",
+        "storage"
     ],
     "background": {
         "scripts": [
