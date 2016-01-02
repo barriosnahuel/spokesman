@@ -78,8 +78,6 @@ $.ajax({
                             console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
                         }
                     });
-                    Last
-                    e
                 }
 
                 syncLastEventRead(events[0]);
