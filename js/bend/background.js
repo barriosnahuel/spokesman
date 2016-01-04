@@ -103,5 +103,4 @@ $.ajax({
 }).fail(function (jqXHR, textStatus, errorThrown) {
     var errorMessage = 'Can\'t load properties file, extension will NOT work.';
     console.error(errorMessage);
-    alert(errorMessage);
 });
