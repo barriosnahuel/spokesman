@@ -1,6 +1,10 @@
 # spokesman
 It's a GitHub's notifications interpreter for Chrome
 
+## Screenshots
+
+[Here](https://drive.google.com/folderview?id=0B6AWn1xLDRvPT0NjaXRJWElvOGc&usp=sharing)
+
 ## Use it
 
 1. Clone this repo in your favourite directory.
