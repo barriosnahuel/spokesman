@@ -57,7 +57,7 @@ $.ajax({
         spk.lib.getEvents(function (err, events) {
 
             if (err) {
-                alert('Can\'t get GitHub\'s events: ' + err);
+                console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
                 for (var i = events.length - 1; i >= 0; i--) {
                     var eachEvent = events[i];
@@ -101,6 +101,5 @@ $.ajax({
     });
 
 }).fail(function (jqXHR, textStatus, errorThrown) {
-    var errorMessage = 'Can\'t load properties file, extension will NOT work.';
     console.error(errorMessage);
 });
