@@ -14,6 +14,10 @@ spk.events.deleteEvent = (function () {
         };
     };
 
+    var shouldProcess = function (dto) {
+        return !spk.properties.push_branches || dto.payload.type !== 'branch' || spk.properties.push_branches.indexOf(dto.payload.branch) >= 0;
+    };
+
     var buildNotification = function (dto) {
         var result;
 
@@ -48,6 +52,7 @@ spk.events.deleteEvent = (function () {
 
     return {
         parse: parseGitHubEvent,
+        shouldProcess: shouldProcess,
         buildNotification: buildNotification
     };
 }());
