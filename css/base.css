@@ -1,0 +1,23 @@
+/*************/
+/* HTML tags */
+/*************/
+
+p:first-letter {
+    text-transform: capitalize;
+}
+
+/***********************/
+/* Bootstrap overrides */
+/***********************/
+
+.input-group-addon:first-letter {
+    text-transform: capitalize;
+}
+
+/**************/
+/* Our styles */
+/**************/
+
+.spk-text-emphasis {
+    text-transform: uppercase;
+}

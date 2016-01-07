@@ -1,0 +1,17 @@
+form div.input-group {
+    margin-top: 20px;
+}
+
+.spk-footer-items {
+    margin-bottom: 50px;
+}
+
+.spk-footer-items > li {
+    float: left;
+}
+
+.spk-footer-items > li:not(:first-child) {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: solid 1px lightgray;
+}

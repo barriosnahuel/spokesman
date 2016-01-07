@@ -3,12 +3,24 @@
  */
 var spk = spk || {};
 
+
+chrome.runtime.onInstalled.addListener(function (details) {
+    console.log('reason: %s', details.reason);
+    console.log('previous version: %s', details.previousVersion);
+
+    if (details.reason === 'install') {
+        chrome.tabs.create({
+            url: 'views/settings.html'
+        }, undefined);
+    }
+});
+
 $.ajax({
-    url: 'local-properties.json',
+    url: 'properties.json',
     dataType: 'json',
     async: false
 }).done(function (properties) {
-    console.log('local-properties.json loaded OK');
+    console.log('Properties file loaded OK');
     spk.properties = properties;
 
     chrome.notifications.onClicked.addListener(function (notificationId) {

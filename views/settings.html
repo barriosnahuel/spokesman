@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/settings.css">
+
+    <title>Spokesman - Settings - Chrome Extensions</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Spokesman settings page</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Username and access token <span class="glyphicon glyphicon-user pull-right" aria-hidden="true"></span></h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" class="form-control" id="username" placeholder="barriosnahuel">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">access token</span>
+                            <input type="text" class="form-control" id="accessToken" placeholder="asjoh1oi2ho135h21ohfasoaoih241o">
+                        </div>
+                        <p class="help-block">access token will <span class="spk-text-emphasis">not</span> be synced to prevent attackers to use your personal
+                            access
+                            token.</p>
+                    </form>
+
+                    <p>
+                        if you don't know how to create your personal access token, just follow the steps on <a target="_blank"
+                                                                                                                href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">this
+                        link</a> and take into account that the only required permission is <code>repo</code>.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Here will be other options to give you a better experience soon...</h3>
+                </div>
+                <div class="panel-body">
+                    &hellip;
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>More info</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Supported events <span class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span></h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">CreateEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">DeleteEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">IssueCommentEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">IssuesEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">PullRequestEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">PullRequestReviewCommentEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">PushEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">ReleaseEvent <span class="label label-primary pull-right">New</span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Still unsupported events...</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item disabled">CommitCommentEvent</li>
+                        <li class="list-group-item disabled">DeploymentEvent</li>
+                        <li class="list-group-item disabled">DeploymentStatusEvent</li>
+                        <li class="list-group-item disabled">DownloadEvent</li>
+                        <li class="list-group-item disabled">FollowEvent</li>
+                        <li class="list-group-item disabled">ForkEvent</li>
+                        <li class="list-group-item disabled">ForkApplyEvent</li>
+                        <li class="list-group-item disabled">GistEvent</li>
+                        <li class="list-group-item disabled">GollumEvent</li>
+                        <li class="list-group-item disabled">MemberEvent</li>
+                        <li class="list-group-item disabled">MembershipEvent</li>
+                        <li class="list-group-item disabled">PageBuildEvent</li>
+                        <li class="list-group-item disabled">PublicEvent</li>
+                        <li class="list-group-item disabled">RepositoryEvent</li>
+                        <li class="list-group-item disabled">StatusEvent</li>
+                        <li class="list-group-item disabled">TeamAddEvent</li>
+                        <li class="list-group-item disabled">WatchEvent</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <hr>
+            <ul class="list-unstyled spk-footer-items">
+                <li>See project on <a target="_blank" href="https://github.com/barriosnahuel/spokesman#spokesman">GitHub</a></li>
+                <li>barrios.nahuel@gmail.com</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jsrender.min.js"></script>
+
+<script src="../js/fend/settings.js"></script>
+
+</body>
+</html>
