@@ -6,8 +6,8 @@ spk.events = spk.events || {};
 
 spk.events.manager = (function () {
     var KNOWN_EVENTS = [
-        //, {id: 'CommitCommentEvent', event: spk.events.commitCommentEvent}
-        {id: 'CreateEvent', event: spk.events.createEvent}
+        {id: 'CommitCommentEvent', event: spk.events.commitCommentEvent}
+        , {id: 'CreateEvent', event: spk.events.createEvent}
         , {id: 'DeleteEvent', event: spk.events.deleteEvent}
         //, {id: 'DeploymentEvent', event: spk.events.deploymentEvent}
         //, {id: 'DeploymentStatusEvent', event: spk.events.deploymentStatusEvent}

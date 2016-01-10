@@ -28,6 +28,7 @@
             "js/jquery-2.1.4.min.js",
             "js/bend/util.js",
             "js/bend/events/issue_comment_event.js",
+            "js/bend/events/commit_comment_event.js",
             "js/bend/events/create_event.js",
             "js/bend/events/delete_event.js",
             "js/bend/events/issues_event.js",
