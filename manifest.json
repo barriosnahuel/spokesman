@@ -5,16 +5,16 @@
     "version": "0.1.0",
     "browser_action": {
         "default_icon": {
-            "19": "img/octocat-head-19.png",
-            "38": "img/octocat-head-38.png"
+            "19": "img/megaphone-2-16.png",
+            "38": "img/megaphone-2-48.png"
         },
         "default_title": "Spokesman",
         "default_popup": "views/list.html"
     },
     "icons": {
-        "16": "img/octocat-head-16.png",
-        "48": "img/github-9-48.png",
-        "128": "img/github-9-128.png"
+        "16": "img/megaphone-2-16.png",
+        "48": "img/megaphone17-64.png",
+        "128": "img/megaphone17-128.png"
     },
     "options_page": "views/settings.html",
     "permissions": [

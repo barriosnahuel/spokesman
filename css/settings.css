@@ -1,3 +1,9 @@
+.page-header img {
+    width: 100px;
+    height: 100px;
+    margin-top: -80px;
+}
+
 form div.input-group {
     margin-top: 20px;
 }
@@ -28,7 +34,14 @@ form div.input-group .form-control:not(:first-child):not(:last-child) {
 }
 
 .spk-footer-items {
-    margin-bottom: 50px;
+    left: auto;
+    right: auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.spk-footer-items img {
+    margin-top: -2px;
 }
 
 .spk-footer-items > li:not(:first-child) {

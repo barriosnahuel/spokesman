@@ -31,9 +31,7 @@ is not present, then it fails and log:
   
 ### icons
 
-Icons were taken from:
-- Extension icon: [here](http://www.iconsdb.com/black-icons/github-9-icon.html).
-- Browser action and favicon: [here](http://www.flaticon.com/free-icon/github-logo-face_37819#term=github&page=1&position=19).
+Icons were taken from [here](http://www.iconsdb.com/black-icons/megaphone-2-icon.html) and [here](http://www.flaticon.com/free-icon/leader-with-loudspeaker_75899#term=megaphone&page=1&position=12).
 
 ## Supported events
 
