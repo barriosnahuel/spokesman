@@ -25,6 +25,7 @@ spk.events.releaseEvent = (function () {
                 , 'Tag: ' + dto.payload.tag
             ])
             , link: dto.payload.link
+            , icon: 'img/events/release.png'
         };
     };
 

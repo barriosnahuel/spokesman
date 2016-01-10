@@ -27,6 +27,7 @@ spk.events.pushEvent = (function () {
                 dto.repo
             ])
             , link: dto.payload.link
+            , icon: 'img/events/push.png'
         };
     };
 

@@ -93,7 +93,7 @@ $.ajax({
                                     title: notification.title,
                                     message: notification.message,
                                     contextMessage: notification.contextMessage,
-                                    iconUrl: 'img/megaphone17-256.png'
+                                    iconUrl: notification.icon || 'img/megaphone17-256.png'
                                 };
 
                                 chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {

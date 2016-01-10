@@ -22,6 +22,24 @@ spk.events.pullRequestEvent = (function () {
     var buildNotification = function (dto) {
         var action = dto.payload.action === 'closed' && dto.payload.merged ? 'merged' : dto.payload.action;
 
+        var icon;
+
+        switch (action) {
+            case 'opened':
+                icon = 'img/events/pr-opened.png';
+                break;
+            case 'closed':
+                icon = 'img/events/pr-closed.png';
+                break;
+            case 'merged':
+                icon = 'img/events/pr-merged.png';
+                break;
+            default :
+                console.log('Wow! We\'ve got a new PR action and it is NOT mapped a switch statement.');
+                icon = undefined;
+                break;
+        }
+
         return {
             title: 'PR ' + action + ' by ' + dto.actor.username
             , message: dto.payload.title
@@ -31,6 +49,7 @@ spk.events.pullRequestEvent = (function () {
                 , '+' + dto.payload.additions + '/-' + dto.payload.deletions
             ])
             , link: dto.payload.link
+            , icon: icon
         };
     };
 

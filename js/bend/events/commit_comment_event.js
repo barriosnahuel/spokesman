@@ -25,6 +25,7 @@ spk.events.commitCommentEvent = (function () {
                 , dto.payload.file
             ])
             , link: dto.payload.link
+            , icon: 'img/events/comments.png'
         };
     };
 

@@ -32,6 +32,18 @@ is not present, then it fails and log:
 ### icons
 
 Icons were taken from [here](http://www.iconsdb.com/black-icons/megaphone-2-icon.html) and [here](http://www.flaticon.com/free-icon/leader-with-loudspeaker_75899#term=megaphone&page=1&position=12).
+In the other hand, event's icons were taken from:
+- Branch: [here](http://www.flaticon.com/free-icon/two-arrows-bifurcation_60687#term=bifurcation&page=1&position=10).
+- Tag: [here](http://www.flaticon.com/free-icon/black-shop-tag_16260#term=tag&page=1&position=15).
+- Comment: [here](http://www.flaticon.com/free-icon/comments_25360#term=comments&page=1&position=1).
+- Repository: [here](http://www.flaticon.com/free-icon/data-management-interface-symbol-with-gears-and-binary-code-numbers_36094#term=code&page=1&position=1).
+- Issue: [here](http://www.flaticon.com/free-icon/checked-list_13194#term=task&page=1&position=1).
+- Release: [here](http://www.flaticon.com/free-icon/checkered-flag_62499#term=flag&page=2&position=23).
+
+Colors:
+- Opened: #6cc644
+- Closed: #bd2c00
+- Merged: #6e5494
 
 ## Supported events
 

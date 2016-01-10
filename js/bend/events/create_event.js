@@ -54,6 +54,7 @@ spk.events.createEvent = (function () {
                         dto.repo
                     ])
                     , link: dto.payload.link
+                    , icon: 'img/events/repository-create.png'
                 };
                 break;
             case 'tag':
@@ -64,6 +65,7 @@ spk.events.createEvent = (function () {
                         dto.repo
                     ])
                     , link: dto.payload.link
+                    , icon: 'img/events/tag-create.png'
                 };
                 break;
             case 'branch':
@@ -74,6 +76,7 @@ spk.events.createEvent = (function () {
                         dto.repo
                     ])
                     , link: dto.payload.link
+                    , icon: 'img/events/branch-create.png'
                 };
                 break;
             default:

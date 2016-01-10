@@ -30,6 +30,7 @@ spk.events.deleteEvent = (function () {
                         dto.repo
                     ])
                     , link: dto.payload.link
+                    , icon: 'img/events/tag-delete.png'
                 };
                 break;
             case 'branch':
@@ -40,6 +41,7 @@ spk.events.deleteEvent = (function () {
                         dto.repo
                     ])
                     , link: dto.payload.link
+                    , icon: 'img/events/branch-delete.png'
                 };
                 break;
             default:

@@ -26,6 +26,7 @@ spk.events.issueCommentEvent = (function () {
                 , '#' + dto.payload.issue.number
             ])
             , link: dto.payload.link
+            , icon: 'img/events/comments.png'
         };
     };
 
