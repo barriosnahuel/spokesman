@@ -21,3 +21,35 @@ p:first-letter {
 .spk-text-emphasis {
     text-transform: uppercase;
 }
+
+/************************/
+/* Glyphicon left/right */
+/************************/
+.spk-inner-addon {
+    position: relative;
+}
+
+.spk-inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+}
+
+.spk-left-addon .glyphicon {
+    left: 0;
+}
+
+.spk-right-addon .glyphicon {
+    right: 0;
+}
+
+.spk-left-addon input {
+    padding-left: 30px;
+}
+
+.spk-right-addon input {
+    padding-right: 30px;
+}
+
+/****************************/
+/* END-Glyphicon left/right */
+/****************************/

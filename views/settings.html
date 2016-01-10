@@ -34,14 +34,18 @@
                 <div class="panel-body">
                     <form role="form">
 
-                        <div class="input-group">
-                            <span class="input-group-addon">@</span>
-                            <input type="text" class="form-control" id="username" placeholder="barriosnahuel">
+                        <div>
+                            <div class="input-group spk-inner-addon spk-right-addon">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" id="username" placeholder="barriosnahuel">
+                                <span id="usernameCheck" class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
+                            </div>
                         </div>
 
-                        <div class="input-group">
+                        <div class="input-group spk-inner-addon spk-right-addon">
                             <span class="input-group-addon">access token</span>
                             <input type="text" class="form-control" id="accessToken" placeholder="asjoh1oi2ho135h21ohfasoaoih241o">
+                            <span id="accessTokenCheck" class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
                         </div>
                         <p class="help-block">access token will <span class="spk-text-emphasis">not</span> be synced to prevent attackers to use your personal
                             access
@@ -65,7 +69,25 @@
                     <h3 class="panel-title">Here will be other options to give you a better experience soon...</h3>
                 </div>
                 <div class="panel-body">
-                    &hellip;
+
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#branchesTab" role="tab" data-toggle="tab">Branches</a></li>
+                        <!--<li role="presentation"><a href="#issueActionsTab" role="tab" data-toggle="tab">Issues</a></li>-->
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="branchesTab">
+                            <p>branches I want to be notified.</p>
+                            <ul id="branches" class="list-unstyled"></ul>
+                        </div>
+
+                        <!--<div role="tabpanel" class="tab-pane" id="issueActionsTab">-->
+                        <!--<p>issues ...</p>-->
+                        <!--<ul id="issues" class="list-unstyled"></ul>-->
+                        <!--</div>-->
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -137,7 +159,7 @@
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
             <hr>
-            <ul class="list-unstyled spk-footer-items">
+            <ul class="list-inline spk-footer-items">
                 <li>See project on <a target="_blank" href="https://github.com/barriosnahuel/spokesman#spokesman">GitHub</a></li>
                 <li>barrios.nahuel@gmail.com</li>
             </ul>
@@ -150,6 +172,17 @@
 <script src="../js/jsrender.min.js"></script>
 
 <script src="../js/fend/settings.js"></script>
+
+<script id="branchInputTemplate" type="text/x-jsrender">
+    <li>
+        <div class="spk-branch spk-inner-addon spk-right-addon">
+            <input type="text" class="form-control" placeholder="{{:placeholder}}" {{if name}}value="{{:name}}"{{/if}}>
+            <span class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </div>
+    </li>
+
+</script>
 
 </body>
 </html>

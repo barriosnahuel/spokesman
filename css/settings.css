@@ -2,16 +2,46 @@ form div.input-group {
     margin-top: 20px;
 }
 
+.spk-inner-addon > .glyphicon {
+    z-index: 2;
+}
+
+.spk-input-feedback {
+    display: none;
+}
+
+.spk-input-feedback.glyphicon-ok {
+    color: green;
+}
+
+#branches .spk-input-feedback {
+    right: 35px;
+}
+
+form div.input-group .form-control:not(:first-child):not(:last-child) {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.nav.nav-tabs {
+    margin-bottom: 15px;
+}
+
 .spk-footer-items {
     margin-bottom: 50px;
 }
 
-.spk-footer-items > li {
-    float: left;
+.spk-footer-items > li:not(:first-child) {
+    padding-left: 8px;
+    border-left: solid 1px lightgray;
 }
 
-.spk-footer-items > li:not(:first-child) {
-    margin-left: 10px;
-    padding-left: 10px;
-    border-left: solid 1px lightgray;
+#branches > li {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spk-branch input {
+    width: 87%;
 }
