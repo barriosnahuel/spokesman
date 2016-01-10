@@ -71,9 +71,13 @@ $.ajax({
             if (err) {
                 console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
-                chrome.storage.sync.get('branches', function (storage) {
+                chrome.storage.sync.get(undefined, function (storage) {
                     if (storage.branches) {
                         spk.properties.push_branches = storage.branches;
+                    }
+
+                    if (storage.issues) {
+                        spk.properties.issues_action = storage.issues;
                     }
 
                     for (var i = events.length - 1; i >= 0; i--) {

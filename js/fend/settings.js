@@ -14,6 +14,7 @@ $(document).ready(function () {
 
     var $branchesList = $('#branches');
     var branches;
+    var issues;
 
     render();
     addListeners();
@@ -33,23 +34,32 @@ $(document).ready(function () {
             }
         });
 
-        chrome.storage.sync.get('branches', function (storage) {
+        chrome.storage.sync.get(undefined, function (storage) {
             branches = storage.branches || [];
+            issues = storage.issues || [];
 
-            if (!storage.branches) {
+            if (!storage.branches || !storage.issues) {
                 $.ajax({
                     url: '../properties.json',
                     dataType: 'json',
                     async: false
                 }).done(function (properties) {
-                    branches = properties.push_branches;
+                    if (!storage.branches) {
+                        branches = properties.push_branches;
+                        saveBranches();
+                    }
 
-                    saveBranches();
+                    if (!storage.issues) {
+                        issues = properties.issues_action;
+                        saveIssues();
+                    }
 
                     addBranches();
+                    addIssuesActions();
                 });
             } else {
                 addBranches();
+                addIssuesActions();
             }
 
             function addBranches() {
@@ -60,6 +70,31 @@ $(document).ready(function () {
                 addBranchInput();
 
                 addBranchLastInputListener();
+            }
+
+            function addIssuesActions() {
+                var $checkboxes = $('#issues').find('>li>ul>li input');
+                for (var i = 0; i < $checkboxes.length; i++) {
+                    var $each = $($checkboxes[i]);
+
+                    if (issues.some(function (issueAction) {
+                            return $each.val() === issueAction;
+                        })) {
+                        $each.bootstrapToggle('on');
+                    }
+
+                    $each.change(function () {
+                        var $this = $(this);
+
+                        if ($this.prop('checked')) {
+                            issues.push($this.val());
+                        } else {
+                            issues.splice(issues.indexOf($this.val()), 1);
+                        }
+
+                        saveIssues();
+                    });
+                }
             }
         });
     }
@@ -149,6 +184,14 @@ $(document).ready(function () {
 
     var saveBranches = function (callback) {
         chrome.storage.sync.set({'branches': branches}, function () {
+            if (callback) {
+                callback();
+            }
+        });
+    };
+
+    var saveIssues = function (callback) {
+        chrome.storage.sync.set({'issues': issues}, function () {
             if (callback) {
                 callback();
             }

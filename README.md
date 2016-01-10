@@ -79,3 +79,4 @@ Sample file:
 - https://www.getbootstrap.com
 - https://www.jquery.com
 - https://www.jsviews.com
+- https://www.bootstraptoggle.com
