@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-toggle.min.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/settings.css">
 
@@ -34,14 +35,18 @@
                 <div class="panel-body">
                     <form role="form">
 
-                        <div class="input-group">
-                            <span class="input-group-addon">@</span>
-                            <input type="text" class="form-control" id="username" placeholder="barriosnahuel">
+                        <div>
+                            <div class="input-group spk-inner-addon spk-right-addon">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" id="username" placeholder="barriosnahuel">
+                                <span id="usernameCheck" class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
+                            </div>
                         </div>
 
-                        <div class="input-group">
+                        <div class="input-group spk-inner-addon spk-right-addon">
                             <span class="input-group-addon">access token</span>
                             <input type="text" class="form-control" id="accessToken" placeholder="asjoh1oi2ho135h21ohfasoaoih241o">
+                            <span id="accessTokenCheck" class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
                         </div>
                         <p class="help-block">access token will <span class="spk-text-emphasis">not</span> be synced to prevent attackers to use your personal
                             access
@@ -65,7 +70,84 @@
                     <h3 class="panel-title">Here will be other options to give you a better experience soon...</h3>
                 </div>
                 <div class="panel-body">
-                    &hellip;
+
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#branchesTab" role="tab" data-toggle="tab">Branches</a></li>
+                        <li role="presentation"><a href="#issueActionsTab" role="tab" data-toggle="tab">Issues</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="branchesTab">
+                            <p>branches I want to be notified.</p>
+                            <ul id="branches" class="list-unstyled"></ul>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="issueActionsTab">
+                            <p>Configure actions on issues for which you want to be notified. See <a target="_blank"
+                                                                                                     href="https://developer.github.com/v3/activity/events/types/#issuesevent">this
+                                link</a> to give a deep look to the
+                                <code>IssuesEvent</code></p>
+                            <ul id="issues" class="list-unstyled">
+                                <li>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="opened">
+                                                Opened
+                                            </label>
+                                        </li>
+
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="closed">
+                                                Closed
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="reopened">
+                                                Reopened
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="assigned">
+                                                Assigned
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="unassigned">
+                                                Unassigned
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="labeled">
+                                                Labeled
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle" value="unlabeled">
+                                                Unlabeled
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -137,7 +219,7 @@
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
             <hr>
-            <ul class="list-unstyled spk-footer-items">
+            <ul class="list-inline spk-footer-items">
                 <li>See project on <a target="_blank" href="https://github.com/barriosnahuel/spokesman#spokesman">GitHub</a></li>
                 <li>barrios.nahuel@gmail.com</li>
             </ul>
@@ -147,9 +229,21 @@
 
 <script src="../js/jquery-2.1.4.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-toggle.min.js"></script>
 <script src="../js/jsrender.min.js"></script>
 
 <script src="../js/fend/settings.js"></script>
+
+<script id="branchInputTemplate" type="text/x-jsrender">
+    <li>
+        <div class="spk-branch spk-inner-addon spk-right-addon">
+            <input type="text" class="form-control" placeholder="{{:placeholder}}" {{if name}}value="{{:name}}"{{/if}}>
+            <span class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </div>
+    </li>
+
+</script>
 
 </body>
 </html>

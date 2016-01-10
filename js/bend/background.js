@@ -5,8 +5,8 @@ var spk = spk || {};
 
 
 chrome.runtime.onInstalled.addListener(function (details) {
-    console.log('reason: %s', details.reason);
-    console.log('previous version: %s', details.previousVersion);
+    console.log('Running onInstalled, reason: %s', details.reason);
+    console.log('Previous version: %s', details.previousVersion);
 
     if (details.reason === 'install') {
         chrome.tabs.create({
@@ -71,40 +71,51 @@ $.ajax({
             if (err) {
                 console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
-                for (var i = events.length - 1; i >= 0; i--) {
-                    var eachEvent = events[i];
+                chrome.storage.sync.get(undefined, function (storage) {
+                    if (storage.branches) {
+                        spk.properties.push_branches = storage.branches;
+                    }
 
-                    isNotRead(eachEvent, function (eachEvent) {
-                        var dto = spk.events.manager.parse(eachEvent);
-                        if (dto && spk.events.manager.shouldProcess(dto)) {
-                            var notification = spk.events.manager.buildNotification(dto);
+                    if (storage.issues) {
+                        spk.properties.issues_action = storage.issues;
+                    }
 
-                            var notificationOptions = {
-                                type: 'basic',
-                                title: notification.title,
-                                message: notification.message,
-                                contextMessage: notification.contextMessage,
-                                iconUrl: 'img/Octocat.png'
-                            };
+                    for (var i = events.length - 1; i >= 0; i--) {
+                        var eachEvent = events[i];
 
-                            chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
-                                var options = {};
-                                options[notificationId] = notification.link;
-                                chrome.storage.local.set(options);
-                            });
-                        } else {
-                            console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
-                        }
-                    });
-                }
+                        isNotRead(eachEvent, function (eachEvent) {
+                            var dto = spk.events.manager.parse(eachEvent);
+                            if (dto && spk.events.manager.shouldProcess(dto)) {
+                                var notification = spk.events.manager.buildNotification(dto);
 
-                syncLastEventRead(events[0]);
+                                var notificationOptions = {
+                                    type: 'basic',
+                                    title: notification.title,
+                                    message: notification.message,
+                                    contextMessage: notification.contextMessage,
+                                    iconUrl: 'img/Octocat.png'
+                                };
+
+                                chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
+                                    var options = {};
+                                    options[notificationId] = notification.link;
+                                    chrome.storage.local.set(options);
+                                });
+                            } else {
+                                console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
+                            }
+                        });
+                    }
+
+                    syncLastEventRead(events[0]);
+                });
             }
         });
     });
 
     if (spk.properties.testing) {
         chrome.storage.sync.clear();
+        chrome.storage.sync.set({'username': 'barriosnahuel'}, undefined);
     }
 
     chrome.alarms.create('', {
