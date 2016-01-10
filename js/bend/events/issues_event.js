@@ -30,16 +30,21 @@ spk.events.issuesEvent = (function () {
             case 'reopened':
                 icon = 'img/events/issue-opened.png';
                 break;
-            //case 'labeled':
-            //    break;
-            //case 'unlabeled':
-            //    break;
-            //case 'assigned':
-            //    break;
-            //case 'unassigned':
-            //    break;
+            case 'labeled':
+                icon = 'img/events/issue-labeled.png';
+                break;
+            case 'unlabeled':
+                icon = 'img/events/issue-unlabeled.png';
+                break;
+            case 'assigned':
+                icon = 'img/events/issue-assigned.png';
+                break;
+            case 'unassigned':
+                icon = 'img/events/issue-unassigned.png';
+                break;
             default :
-                icon = 'img/events/issue.png';
+                console.log('Wow! We\'ve got a new issue action and it is NOT mapped a switch statement.');
+                icon = undefined;
                 break;
         }
 

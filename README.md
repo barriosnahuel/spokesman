@@ -38,6 +38,9 @@ In the other hand, event's icons were taken from:
 - Comment: [here](http://www.flaticon.com/free-icon/comments_25360#term=comments&page=1&position=1).
 - Repository: [here](http://www.flaticon.com/free-icon/data-management-interface-symbol-with-gears-and-binary-code-numbers_36094#term=code&page=1&position=1).
 - Issue: [here](http://www.flaticon.com/free-icon/checked-list_13194#term=task&page=1&position=1).
+- Issue labeled/unlabeled: [here](http://www.flaticon.com/free-icon/label_24141#term=label&page=1&position=11).
+- Issue assigned: [here](http://www.flaticon.com/free-icon/new-user_72648#term=add-user&page=1&position=3).
+- Issue unassigned: [here](http://www.flaticon.com/free-icon/remove-user_72830#term=delete-user&page=1&position=2).
 - Release: [here](http://www.flaticon.com/free-icon/checkered-flag_62499#term=flag&page=2&position=23).
 
 Colors:
