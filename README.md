@@ -29,6 +29,12 @@ is not present, then it fails and log:
   script in the following Content Security Policy directive: "default-src 'self'". Note that
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
   
+### icons
+
+Icons were taken from:
+- Extension icon: [here](http://www.iconsdb.com/black-icons/github-9-icon.html).
+- Browser action and favicon: [here](http://www.flaticon.com/free-icon/github-logo-face_37819#term=github&page=1&position=19).
+
 ## Supported events
 
 The following events are those ones that are firing desktop notifications right now. We are working hard to add more events as soon as possible!
