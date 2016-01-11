@@ -3,7 +3,7 @@ It's a GitHub's notifications interpreter for Chrome
 
 ## Screenshots
 
-[Here](https://drive.google.com/folderview?id=0B6AWn1xLDRvPT0NjaXRJWElvOGc&usp=sharing)
+[Here](https://goo.gl/vBtHnG)
 
 ## Use it
 
