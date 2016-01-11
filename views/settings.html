@@ -68,7 +68,7 @@
         <div class="col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Here will be other options to give you a better experience soon...</h3>
+                    <h3 class="panel-title">Configure which kind of events you want to receive</h3>
                 </div>
                 <div class="panel-body">
 
@@ -79,7 +79,10 @@
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="branchesTab">
-                            <p>branches I want to be notified.</p>
+                            <p>branches I want to be notified after any
+                                <a target="_blank" href="https://developer.github.com/v3/activity/events/types/#createevent"><code>CreateEvent</code></a>,
+                                <a target="_blank" href="https://developer.github.com/v3/activity/events/types/#deleteevent"><code>DeleteEvent</code></a> or
+                                <a target="_blank" href="https://developer.github.com/v3/activity/events/types/#pushevent"><code>PushEvent</code></a>.
                             <ul id="branches" class="list-unstyled"></ul>
                         </div>
 
