@@ -1,10 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Spokesman - GitHub's notifications interpreter",
+    "name": "Spokesman -GitHub's notifications interpreter",
     "short_name": "Spokesman",
     "version": "0.2.1",
     "description": "Get desktop notifications of events that occur on GitHub that really interest you.",
-    "default_locale": "en",
     "browser_action": {
         "default_icon": {
             "19": "img/megaphone-2-16.png",
