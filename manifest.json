@@ -17,10 +17,7 @@
         "48": "img/megaphone17-64.png",
         "128": "img/megaphone17-128.png"
     },
-    "options_ui": {
-        "chrome_style": false,
-        "page": "views/settings.html"
-    },
+    "options_page": "views/settings.html",
     "permissions": [
         "alarms",
         "notifications",
