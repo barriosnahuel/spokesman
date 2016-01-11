@@ -26,6 +26,7 @@ spk.events.pullRequestEvent = (function () {
 
         switch (action) {
             case 'opened':
+            case 'reopened':
                 icon = 'img/events/pr-opened.png';
                 break;
             case 'closed':
