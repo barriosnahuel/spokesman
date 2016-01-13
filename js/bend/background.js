@@ -65,11 +65,7 @@ var spk = spk || {};
     };
 
     var onNotificationClosed = function (notificationId, byUser) {
-        if (byUser) {
-            console.log('notification %s %s', notificationId, ' closed by the user');
-
-            chrome.storage.local.remove(notificationId, undefined);
-        }
+        chrome.storage.local.remove(notificationId, undefined);
     };
 
     var onAlarmFired = function (alarm) {
