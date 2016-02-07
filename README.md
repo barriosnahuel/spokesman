@@ -1,9 +1,13 @@
 # spokesman
 It's a GitHub's notifications interpreter for Chrome
 
+[![version](https://img.shields.io/github/release/barriosnahuel/spokesman.svg)](chrome.google.com/webstore/detail/epemkmimdjecaegobcafcblljdjjicpm)
+[![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
+[![experimental](https://img.shields.io/badge/stability-experimental-yellow.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index)
+
 ## Screenshots
 
-[Here](https://goo.gl/vBtHnG)
+See [listing](https://goo.gl/vBtHnG) in Chrome's store.
 
 ## Use it
 
