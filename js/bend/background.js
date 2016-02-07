@@ -5,7 +5,7 @@ var spk = spk || {};
 
 (function () {
 
-    var isProcessingQueue = false;
+    var isProcessingQueue;
 
     var onExtensionInstalledOrUpdated = function (details) {
         console.info('Running onInstalled, reason: %s', details.reason);
@@ -104,7 +104,7 @@ var spk = spk || {};
     var onAlarmFired = function (alarm) {
         runAPICall();
 
-        setTimeout(processQueue, 7000);
+        setTimeout(processQueue, 5000);
     };
 
     var runAPICall = function () {
@@ -115,7 +115,7 @@ var spk = spk || {};
         spk.lib.getEvents(function (err, events) {
 
             if (err) {
-                console.error('ERROR: Can\'t get GitHub\'s events: %s', err);
+                console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
 
                 chrome.storage.sync.get(undefined, function (storage) {

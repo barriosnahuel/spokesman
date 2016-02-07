@@ -22,7 +22,7 @@ spk.lib = (function () {
                             callback(undefined, data);
 
                         }).fail(function (jqXHR, textStatus, errorThrown) {
-                            console.warn('Error calling GitHub\'s API: %s', textStatus);
+                            console.error('Calling GitHub\'s API: %s', textStatus);
                             callback(textStatus, undefined);
                         });
                     } else {
