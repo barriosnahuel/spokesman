@@ -36,7 +36,7 @@ spk.events.pullRequestEvent = (function () {
                 icon = 'img/events/pr-merged.png';
                 break;
             default :
-                console.log('Wow! We\'ve got a new PR action and it is NOT mapped a switch statement.');
+                console.warn('Wow! We\'ve got a new PR action and it is NOT mapped a switch statement.');
                 icon = undefined;
                 break;
         }

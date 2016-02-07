@@ -29,7 +29,7 @@ spk.events.createEvent = (function () {
                 };
                 break;
             default:
-                console.log('WARN: CreateEvent %s is NOT mapped', dto.payload.ref_type);
+                console.warn('CreateEvent %s is NOT mapped', dto.payload.ref_type);
                 break;
         }
 
@@ -80,7 +80,7 @@ spk.events.createEvent = (function () {
                 };
                 break;
             default:
-                console.log('WARN: CreateEvent %s is NOT mapped', dto.payload.ref_type);
+                console.warn('CreateEvent %s is NOT mapped', dto.payload.ref_type);
                 break;
         }
 

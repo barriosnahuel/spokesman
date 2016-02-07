@@ -9,7 +9,7 @@ chrome.tabs.create({
 }, undefined);
 
 //$(document).ready(function () {
-//    console.log('==>document.ready');
+//    console.debug('==>document.ready');
 //
 //    spk.lib.helloWorld();
 //    spk.templates.register();
