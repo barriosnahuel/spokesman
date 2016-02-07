@@ -44,7 +44,7 @@ spk.events.manager = (function () {
         }
 
         if (!event) {
-            console.log('Unknown event type %s', type);
+            console.warn('Unknown event type %s', type);
         }
 
         return event;
@@ -85,7 +85,11 @@ spk.events.manager = (function () {
     };
 
     var buildNotification = function (dto) {
-        return findEvent(dto.type).buildNotification(dto);
+        var result = findEvent(dto.type).buildNotification(dto);
+
+        result.id = dto.id;
+
+        return result;
     };
 
     var shouldProcess = function (dto) {

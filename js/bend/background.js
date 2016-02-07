@@ -5,9 +5,11 @@ var spk = spk || {};
 
 (function () {
 
+    var isProcessingQueue = false;
+
     var onExtensionInstalledOrUpdated = function (details) {
-        console.log('Running onInstalled, reason: %s', details.reason);
-        console.log('Previous version: %s', details.previousVersion);
+        console.info('Running onInstalled, reason: %s', details.reason);
+        console.info('Previous version: %s', details.previousVersion);
 
         if (details.reason === 'install') {
             chrome.tabs.create({
@@ -16,39 +18,46 @@ var spk = spk || {};
         }
     };
 
-    /**
-     * @param eachEvent
-     * @param next
-     */
-    var isNotRead = function (eachEvent, next) {
-        chrome.storage.sync.get('lastEventId', function (data) {
-            if (!data.lastEventId || eachEvent.id > data.lastEventId) {
-                next(eachEvent);
-            }
+    var fireDesktopNotification = function (notification) {
+        var notificationOptions = {
+            type: 'basic',
+            title: notification.title,
+            message: notification.message,
+            contextMessage: notification.contextMessage,
+            iconUrl: notification.icon || 'img/megaphone17-256.png'
+        };
+
+        chrome.notifications.create(notification.id, notificationOptions, function (notificationId) {
+            var options = {};
+            options[notificationId] = notification.link;
+            chrome.storage.local.set(options);
+        });
+    };
+
+    var saveQueue = function (queue) {
+        chrome.storage.local.set({'queue': queue}, undefined);
+        console.debug('Saved queue w/ size: %d', queue.length);
+    };
+
+    var scheduleNotifications = function (notifications) {
+        chrome.storage.local.get('queue', function (storage) {
+            var queue = storage.queue || [];
+            queue = queue.concat(notifications);
+            saveQueue(queue);
         });
     };
 
     var processEvent = function (eachEvent) {
         var dto = spk.events.manager.parse(eachEvent);
+        var notification;
+
         if (dto && spk.events.manager.shouldProcess(dto)) {
-            var notification = spk.events.manager.buildNotification(dto);
-
-            var notificationOptions = {
-                type: 'basic',
-                title: notification.title,
-                message: notification.message,
-                contextMessage: notification.contextMessage,
-                iconUrl: notification.icon || 'img/megaphone17-256.png'
-            };
-
-            chrome.notifications.create(dto.id, notificationOptions, function (notificationId) {
-                var options = {};
-                options[notificationId] = notification.link;
-                chrome.storage.local.set(options);
-            });
+            notification = spk.events.manager.buildNotification(dto);
         } else {
-            console.log('WARN: Event id %s (%s) was NOT handled', eachEvent.id, eachEvent.type);
+            console.info('Event id %s (%s) was NOT handled because of user configuration', eachEvent.id, eachEvent.type);
         }
+
+        return notification;
     };
 
     var onNotificationClicked = function (notificationId) {
@@ -64,24 +73,49 @@ var spk = spk || {};
         });
     };
 
+    var dequeue = function () {
+        chrome.storage.local.get('queue', function (storage) {
+            var queue = storage.queue || [];
+
+            if (queue.length > 0) {
+                var nextNotification = queue.shift();
+
+                fireDesktopNotification(nextNotification);
+
+                saveQueue(queue);
+            }
+        });
+    };
+
     var onNotificationClosed = function (notificationId, byUser) {
         chrome.storage.local.remove(notificationId, undefined);
+
+        /**
+         * If the notification was closed by the user, then we wait for the next alarm to be fired before displaying another notification.
+         */
+        if (byUser) {
+            isProcessingQueue = false;
+        } else {
+            isProcessingQueue = true;
+            dequeue();
+        }
     };
 
     var onAlarmFired = function (alarm) {
+        runAPICall();
 
-        var syncLastEventRead = function (event) {
-            console.log('Last event read %s', event.id);
+        setTimeout(processQueue, 7000);
+    };
 
-            chrome.storage.sync.set({'lastEventId': event.id}, undefined);
-        };
+    var runAPICall = function () {
+        console.debug('==> runAPICall...');
 
-        console.log('Checking for new notifications...');
+        console.info('Checking for new notifications...');
 
         spk.lib.getEvents(function (err, events) {
 
             if (err) {
-                console.error('Can\'t get GitHub\'s events: %s', err);
+                console.error('ERROR: Can\'t get GitHub\'s events: %s', err);
             } else {
 
                 chrome.storage.sync.get(undefined, function (storage) {
@@ -93,15 +127,39 @@ var spk = spk || {};
                         spk.properties.issues_action = storage.issues;
                     }
 
+                    var notifications = [];
                     for (var i = events.length - 1; i >= 0; i--) {
-                        isNotRead(events[i], processEvent);
+                        var eachEvent = events[i];
+
+                        if (storage.lastEventId && eachEvent.id <= storage.lastEventId) {
+                            console.debug('Skipping event %s because last read event is %s.', eachEvent.id, storage.lastEventId);
+                        } else {
+                            var notification = processEvent(eachEvent);
+                            if (notification) {
+                                notifications.push(notification);
+                            }
+                        }
                     }
 
-                    syncLastEventRead(events[0]);
-                });
+                    console.debug('Created %d/%d notifications based on API response.', notifications.length, events.length);
+                    scheduleNotifications(notifications);
 
+                    console.info('Last event/notification read %s', events[0].id);
+                    chrome.storage.sync.set({'lastEventId': events[0].id}, undefined);
+                });
             }
         });
+    };
+
+    var processQueue = function () {
+        console.debug('==> processQueue...');
+
+        if (isProcessingQueue) {
+            console.debug('Queue is already being processed.')
+        } else {
+            console.debug('Start queue process because of a new alarm.');
+            dequeue();
+        }
     };
 
     // END-Declaring methods //////////////////////////////////////////////////////////////////
@@ -117,7 +175,7 @@ var spk = spk || {};
         dataType: 'json',
         async: false
     }).done(function (properties) {
-        console.log('Properties file loaded OK');
+        console.info('Properties file loaded OK');
         spk.properties = properties;
 
         chrome.notifications.onClicked.addListener(onNotificationClicked);
@@ -129,6 +187,7 @@ var spk = spk || {};
         if (spk.properties.testing) {
             chrome.storage.sync.clear();
             chrome.storage.sync.set({'username': 'barriosnahuel'}, undefined);
+            chrome.storage.local.set({'queue': []}, undefined);
         }
 
         chrome.alarms.create('', {
