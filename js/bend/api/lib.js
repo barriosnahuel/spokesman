@@ -4,10 +4,6 @@
 var spk = spk || {};
 spk.lib = (function () {
 
-    var helloWorld = function () {
-        console.log("hello world!");
-    };
-
     var getEvents = function (callback) {
 
         chrome.storage.sync.get('username', function (localStorage) {
@@ -22,11 +18,11 @@ spk.lib = (function () {
                                 jqXHR.setRequestHeader('Authorization', 'token ' + syncedStorage.accessToken);
                             }
                         }).done(function (data, textStatus, jqXHR) {
-                            console.log('GitHub\'s API called OK');
+                            console.info('GitHub\'s API called OK');
                             callback(undefined, data);
 
                         }).fail(function (jqXHR, textStatus, errorThrown) {
-                            console.log('Error calling GitHub\'s API: %s', textStatus);
+                            console.warn('Error calling GitHub\'s API: %s', textStatus);
                             callback(textStatus, undefined);
                         });
                     } else {
@@ -40,7 +36,6 @@ spk.lib = (function () {
     };
 
     return {
-        helloWorld: helloWorld,
         getEvents: getEvents
     };
 }());

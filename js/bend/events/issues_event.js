@@ -43,7 +43,7 @@ spk.events.issuesEvent = (function () {
                 icon = 'img/events/issue-unassigned.png';
                 break;
             default :
-                console.log('Wow! We\'ve got a new issue action and it is NOT mapped a switch statement.');
+                console.warn('Wow! We\'ve got a new issue action and it is NOT mapped a switch statement.');
                 icon = undefined;
                 break;
         }
