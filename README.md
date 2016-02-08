@@ -4,6 +4,8 @@ It's a GitHub's notifications interpreter for Chrome
 [![version](https://img.shields.io/github/release/barriosnahuel/spokesman.svg)](chrome.google.com/webstore/detail/epemkmimdjecaegobcafcblljdjjicpm)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 [![experimental](https://img.shields.io/badge/stability-experimental-yellow.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index)
+[![Code Climate](https://codeclimate.com/github/barriosnahuel/spokesman/badges/gpa.svg)](https://codeclimate.com/github/barriosnahuel/spokesman)
+[![Issue Count](https://codeclimate.com/github/barriosnahuel/spokesman/badges/issue_count.svg)](https://codeclimate.com/github/barriosnahuel/spokesman)
 
 ## Screenshots
 
@@ -13,7 +15,7 @@ See [listing](https://goo.gl/vBtHnG) in Chrome's store.
 
 1. Clone this repo in your favourite directory.
 2. Open Chrome and go to `chrome://extensions`
-3. Assure **Developer mode** is checked, if not then check it.
+3. Assure **Developer mode** isAdded  checked, if not then check it.
 4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
 5. Setup your username and personal access token on the settings page.
 
