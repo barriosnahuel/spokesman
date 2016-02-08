@@ -1,0 +1,32 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+      - css
+ecmaFeatures:
+  modules: true
+env:
+  browser: true
+  jquery: true
+ratings:
+  paths:
+  - css/**
+  - img/**
+  - js/**
+  - views/**
+  - "**.js"
+  - "**.css"
+exclude_paths:
+- js/*
+- store/**/*
+- css/bootstrap.min.css
+- css/bootstrap.min.css.map
+- css/bootstrap-theme.min.css
+- css/bootstrap-theme.min.css.map
+- css/bootstrap-toggle.min.css
