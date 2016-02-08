@@ -11,7 +11,7 @@ It's a GitHub's notifications interpreter for Chrome
 
 See [listing](https://goo.gl/vBtHnG) in Chrome's store.
 
-## Use it
+## Contributing
 
 1. Clone this repo in your favourite directory.
 2. Open Chrome and go to `chrome://extensions`
