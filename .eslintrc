@@ -3,11 +3,11 @@ ecmaFeatures:
   jsx: true
 
 env:
-  amd: true
+  amd: false
   browser: true
   es6: true
   jquery: true
-  node: true
+  node: false
 
 # http://eslint.org/docs/rules/
 rules:

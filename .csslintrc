@@ -1,2 +1,3 @@
 --exclude-exts=.min.css
+--exclude-exts=.min.css.map
 --ignore=adjoining-classes,box-model,ids,order-alphabetical,unqualified-attributes
