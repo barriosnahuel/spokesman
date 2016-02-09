@@ -37,6 +37,7 @@
             "js/bend/events/pull_request_review_comment_event.js",
             "js/bend/events/push_event.js",
             "js/bend/events/release_event.js",
+            "js/bend/events/watch_event.js",
             "js/bend/events/manager.js",
             "js/bend/api/lib.js",
             "js/bend/background.js"
