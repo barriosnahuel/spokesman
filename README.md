@@ -48,6 +48,7 @@ In the other hand, event's icons were taken from:
 - Issue assigned: [here](http://www.flaticon.com/free-icon/new-user_72648#term=add-user&page=1&position=3).
 - Issue unassigned: [here](http://www.flaticon.com/free-icon/remove-user_72830#term=delete-user&page=1&position=2).
 - Release: [here](http://www.flaticon.com/free-icon/checkered-flag_62499#term=flag&page=2&position=23).
+- Star: [here](http://www.flaticon.com/free-icon/mark-as-favorite-star_60973#term=star&page=1&position=3).
 
 Colors:
 - Opened: #6cc644
@@ -66,6 +67,7 @@ The following events are those ones that are firing desktop notifications right 
 - PullRequestReviewCommentEvent
 - PushEvent
 - ReleaseEvent
+- WatchEvent
 
 To see the full list of events published by the GitHub API take a look to [this link](https://developer.github.com/v3/activity/events/types/).
 
