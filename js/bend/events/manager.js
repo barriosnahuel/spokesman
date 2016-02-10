@@ -30,7 +30,7 @@ spk.events.manager = (function () {
         //, {id: 'RepositoryEvent', event: spk.events.repositoryEvent}
         //, {id: 'StatusEvent', event: spk.events.statusEvent}
         //, {id: 'TeamAddEvent', event: spk.events.teamAddEvent}
-        //, {id: 'WatchEvent', event: spk.events.watchEvent}
+        , {id: 'WatchEvent', event: spk.events.watchEvent}
     ];
 
     var findEvent = function (type) {
