@@ -39,6 +39,7 @@
             "js/bend/events/release_event.js",
             "js/bend/events/watch_event.js",
             "js/bend/events/manager.js",
+            "js/bend/events/custom/custom_issues_event.js",
             "js/bend/api/lib.js",
             "js/bend/background.js"
         ],
