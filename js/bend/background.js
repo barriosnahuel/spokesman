@@ -117,23 +117,20 @@ var spk = spk || {};
             var mergeEvents = function (lastEventId, events) {
                 var mergedEvents = [];
                 var decrement = 1;
-                for (var i = events.length - 15; i >= 0; i -= decrement, decrement = 1) {
+                for (var i = events.length - 1; i >= 0; i -= decrement, decrement = 1) {
                     var currentEvent = events[i];
 
                     if (lastEventId && currentEvent.id <= lastEventId) {
                         console.debug('Skipping event %s because last read event is %s.', currentEvent.id, lastEventId);
                     } else {
-                        if (currentEvent.type === 'IssueCommentEvent' && i - 1 >= 0) {
-                            var nextEvent = events[i - 1];
-                            if (nextEvent.type === 'IssuesEvent'
-                                && nextEvent.payload.issue.number == currentEvent.payload.issue.number
-                                && (nextEvent.payload.action === 'closed' || nextEvent.payload.action === 'reopened')) {
+                        var mergedEventsQuantity;
 
-                                currentEvent.type += '+' + nextEvent.type;
-                                currentEvent.payload.action += '+' + nextEvent.payload.action;
+                        if (!mergedEventsQuantity) {
+                            mergedEventsQuantity = spk.events.custom.issuesEvent.check(events, i, currentEvent);
+                        }
 
-                                decrement = 2;
-                            }
+                        if (mergedEventsQuantity) {
+                            decrement = mergedEventsQuantity;
                         }
 
                         mergedEvents.push(currentEvent);
