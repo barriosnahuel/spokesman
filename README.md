@@ -23,6 +23,7 @@ The following events are those ones that are firing desktop notifications right 
 - PullRequestReviewCommentEvent
 - PushEvent
 - ReleaseEvent
+- WatchEvent
 
 To see the full list of events published by the GitHub API take a look to [this link](https://developer.github.com/v3/activity/events/types/).
 
@@ -39,10 +40,11 @@ is not present, then it fails and log:
 > Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of
   script in the following Content Security Policy directive: "default-src 'self'". Note that
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
-  
-## Develop and testing
 
-### Setup
+  
+## Contributing
+
+### Setup your Chrome
 
 1. Clone this repo in your favourite directory.
 2. Open Chrome and go to `chrome://extensions`
@@ -55,8 +57,7 @@ is not present, then it fails and log:
 ### Configure properties file
 Edit `properties.json` file in the root directory (just next to this file) and add
  - `"testing": true` <= It's an important flag to prevent checking for new events once a minute.
- 
-  
+
 Sample file:
 
 ```json
@@ -88,11 +89,12 @@ In the other hand, event's icons were taken from:
 - Issue assigned: [here](http://www.flaticon.com/free-icon/new-user_72648#term=add-user&page=1&position=3).
 - Issue unassigned: [here](http://www.flaticon.com/free-icon/remove-user_72830#term=delete-user&page=1&position=2).
 - Release: [here](http://www.flaticon.com/free-icon/checkered-flag_62499#term=flag&page=2&position=23).
+- Star: [here](http://www.flaticon.com/free-icon/mark-as-favorite-star_60973#term=star&page=1&position=3).
 
 Colors:
-- Opened: `#6cc644`
-- Closed: `#bd2c00`
-- Merged: `#6e5494`
+- Opened: #6cc644
+- Closed: #bd2c00
+- Merged: #6e5494
 
 ### Used libraries
 
@@ -100,3 +102,17 @@ Colors:
 - https://www.jquery.com
 - https://www.jsviews.com
 - https://www.bootstraptoggle.com
+
+## Manifest notes
+
+### content_security_policy
+
+It is required because of jsrender. If 
+
+`script-src 'self' 'unsafe-eval'; object-src 'self'`
+
+is not present, then it fails and log:
+
+> Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of
+  script in the following Content Security Policy directive: "default-src 'self'". Note that
+  'script-src' was not explicitly set, so 'default-src' is used as a fallback.
