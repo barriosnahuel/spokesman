@@ -5,7 +5,7 @@ var spk = spk || {};
 spk.events = spk.events || {};
 spk.events.custom = spk.events.custom || {};
 
-spk.events.custom.issuesEvent = (function () {
+spk.events.custom.issuesEvents = (function () {
 
     var check = function (events, index, currentEvent) {
         var decrement;

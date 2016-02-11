@@ -126,7 +126,7 @@ var spk = spk || {};
                         var mergedEventsQuantity;
 
                         if (!mergedEventsQuantity) {
-                            mergedEventsQuantity = spk.events.custom.issuesEvent.check(events, i, currentEvent);
+                            mergedEventsQuantity = spk.events.custom.issuesEvents.check(events, i, currentEvent);
                         }
 
                         if (mergedEventsQuantity) {
