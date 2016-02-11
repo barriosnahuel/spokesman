@@ -11,15 +11,21 @@ It's a GitHub's notifications interpreter for Chrome
 
 See [listing](https://goo.gl/vBtHnG) in Chrome's store.
 
-## Contributing
+## Supported events
 
-1. Clone this repo in your favourite directory.
-2. Open Chrome and go to `chrome://extensions`
-3. Assure **Developer mode** isAdded  checked, if not then check it.
-4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
-5. Setup your username and personal access token on the settings page.
+The following events are those ones that are firing desktop notifications right now. We are working hard to add more events as soon as possible!
 
-**Important:** Take into account that for private repos your access token *must* have the `repo` permission enabled.
+- CreateEvent
+- DeleteEvent
+- IssueCommentEvent
+- IssuesEvent
+- PullRequestEvent
+- PullRequestReviewCommentEvent
+- PushEvent
+- ReleaseEvent
+- WatchEvent
+
+To see the full list of events published by the GitHub API take a look to [this link](https://developer.github.com/v3/activity/events/types/).
 
 ## Manifest notes
 
@@ -34,7 +40,42 @@ is not present, then it fails and log:
 > Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of
   script in the following Content Security Policy directive: "default-src 'self'". Note that
   'script-src' was not explicitly set, so 'default-src' is used as a fallback.
+
   
+## Contributing
+
+### Setup your Chrome
+
+1. Clone this repo in your favourite directory.
+2. Open Chrome and go to `chrome://extensions`
+3. Assure **Developer mode** isAdded  checked, if not then check it.
+4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
+5. Setup your username and personal access token on the settings page.
+
+**Important:** Take into account that for private repos your access token *must* have the `repo` permission enabled.
+
+### Configure properties file
+Edit `properties.json` file in the root directory (just next to this file) and add
+ - `"testing": true` <= It's an important flag to prevent checking for new events once a minute.
+
+Sample file:
+
+```json
+{
+    "testing": true,
+    "push_branches": [
+        "master",
+        "develop",
+        "development"
+    ],
+    "issues_action": [
+        "opened",
+        "closed",
+        "reopened"
+    ]
+}
+```
+
 ### icons
 
 Icons were taken from [here](http://www.iconsdb.com/black-icons/megaphone-2-icon.html) and [here](http://www.flaticon.com/free-icon/leader-with-loudspeaker_75899#term=megaphone&page=1&position=12).
@@ -55,47 +96,7 @@ Colors:
 - Closed: #bd2c00
 - Merged: #6e5494
 
-## Supported events
-
-The following events are those ones that are firing desktop notifications right now. We are working hard to add more events as soon as possible!
-
-- CreateEvent
-- DeleteEvent
-- IssueCommentEvent
-- IssuesEvent
-- PullRequestEvent
-- PullRequestReviewCommentEvent
-- PushEvent
-- ReleaseEvent
-- WatchEvent
-
-To see the full list of events published by the GitHub API take a look to [this link](https://developer.github.com/v3/activity/events/types/).
-
-## Develop and testing
-
-Edit `properties.json` file in the root directory (just next to this file) and add
- - `"testing": true` <= It's an important flag to prevent checking for new events once a minute.
- 
-  
-Sample file:
-
-```json
-{
-    "testing": true,
-    "push_branches": [
-        "master",
-        "develop",
-        "development"
-    ],
-    "issues_action": [
-        "opened",
-        "closed",
-        "reopened"
-    ]
-}
-```
-
-## Used libraries
+### Used libraries
 
 - https://www.getbootstrap.com
 - https://www.jquery.com

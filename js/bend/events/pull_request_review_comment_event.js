@@ -21,7 +21,7 @@ spk.events.pullRequestReviewCommentEvent = (function () {
     var buildNotification = function (dto) {
         return {
             title: dto.actor.username + ' said on ' + dto.payload.pullRequest.title
-            , message: dto.payload.text
+            , message: '"' + dto.payload.text + '"'
             , contextMessage: spk.util.buildNotificationContext([
                 dto.repo
                 , '#' + dto.payload.pullRequest.number

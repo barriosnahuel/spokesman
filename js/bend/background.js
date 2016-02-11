@@ -114,6 +114,35 @@ var spk = spk || {};
 
         spk.lib.getEvents(function (err, events) {
 
+            var mergeEvents = function (lastEventId, events) {
+                var mergedEvents = [];
+                var decrement = 1;
+                for (var i = events.length - 15; i >= 0; i -= decrement, decrement = 1) {
+                    var currentEvent = events[i];
+
+                    if (lastEventId && currentEvent.id <= lastEventId) {
+                        console.debug('Skipping event %s because last read event is %s.', currentEvent.id, lastEventId);
+                    } else {
+                        if (currentEvent.type === 'IssueCommentEvent' && i - 1 >= 0) {
+                            var nextEvent = events[i - 1];
+                            if (nextEvent.type === 'IssuesEvent'
+                                && nextEvent.payload.issue.number == currentEvent.payload.issue.number
+                                && (nextEvent.payload.action === 'closed' || nextEvent.payload.action === 'reopened')) {
+
+                                currentEvent.type += '+' + nextEvent.type;
+                                currentEvent.payload.action += '+' + nextEvent.payload.action;
+
+                                decrement = 2;
+                            }
+                        }
+
+                        mergedEvents.push(currentEvent);
+                    }
+                }
+
+                return mergedEvents;
+            };
+
             if (err) {
                 console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
@@ -127,17 +156,15 @@ var spk = spk || {};
                         spk.properties.issues_action = storage.issues;
                     }
 
-                    var notifications = [];
-                    for (var i = events.length - 1; i >= 0; i--) {
-                        var eachEvent = events[i];
+                    var mergedEvents = mergeEvents(storage.lastEventId, events);
 
-                        if (storage.lastEventId && eachEvent.id <= storage.lastEventId) {
-                            console.debug('Skipping event %s because last read event is %s.', eachEvent.id, storage.lastEventId);
-                        } else {
-                            var notification = processEvent(eachEvent);
-                            if (notification) {
-                                notifications.push(notification);
-                            }
+                    var notifications = [];
+                    for (var i = mergedEvents.length - 1; i >= 0; i--) {
+                        var eachMergedEvent = mergedEvents[i];
+
+                        var notification = processEvent(eachMergedEvent);
+                        if (notification) {
+                            notifications.push(notification);
                         }
                     }
 

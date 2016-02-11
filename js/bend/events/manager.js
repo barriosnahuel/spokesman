@@ -19,6 +19,7 @@ spk.events.manager = (function () {
         //, {id: 'GollumEvent', event: spk.events.gollumEvent}
         , {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent}
         , {id: 'IssuesEvent', event: spk.events.issuesEvent}
+        , {id: 'IssueCommentEvent+IssuesEvent', event: spk.events.issueCommentEvent}
         //, {id: 'MemberEvent', event: spk.events.memberEvent}
         //, {id: 'MembershipEvent', event: spk.events.membershipEvent}
         //, {id: 'PageBuildEvent', event: spk.events.pageBuildEvent}
