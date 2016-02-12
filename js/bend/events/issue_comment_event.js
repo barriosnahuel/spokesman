@@ -20,23 +20,41 @@ spk.events.issueCommentEvent = (function () {
 
     var buildNotification = function (dto) {
         var result;
+        var icon;
+        var issueType;
 
         var mergedActions = dto.payload.action.split('+');
         if (mergedActions.length > 1) {
 
-            // i.e.: Issue closed w/comment by @barriosnahuel
+            var mergedTypes = dto.type.split('+');
+            if (mergedTypes[1] === 'IssuesEvent') {
+                // i.e.: Issue closed w/comment by @barriosnahuel
 
-            var icon;
-            if (mergedActions[1] === 'closed') {
-                icon = 'img/events/issue-closed+commented.png';
-            } else if (mergedActions[1] === 'reopened') {
-                icon = 'img/events/issue-opened+commented.png';
+                if (mergedActions[1] === 'closed') {
+                    icon = 'img/events/issue-closed+commented.png';
+                } else if (mergedActions[1] === 'reopened') {
+                    icon = 'img/events/issue-opened+commented.png';
+                } else {
+                    console.error('Error merging actions. Can\'t create icon for IssueCommentEvent w/ action %s', mergedActions[1]);
+                }
+
+                issueType = 'Issue ';
             } else {
-                console.error('Error merging actions. Can\'t create icon for IssueCommentEvent w/ action %s', mergedActions[1]);
+                // Then it's PullRequestEvent: PR reopened w/ comment by @barriosnahuel
+
+                if (mergedActions[1] === 'closed') {
+                    icon = 'img/events/pr-closed+commented.png';
+                } else if (mergedActions[1] === 'reopened') {
+                    icon = 'img/events/pr-opened+commented.png';
+                } else {
+                    console.error('Error merging actions. Can\'t create icon for IssueCommentEvent w/ action %s', mergedActions[1]);
+                }
+
+                issueType = 'PR ';
             }
 
             result = {
-                title: 'Issue ' + mergedActions[1] + ' w/comment by ' + dto.actor.username
+                title: issueType + mergedActions[1] + ' w/comment by ' + dto.actor.username
                 , message: dto.payload.issue.title + ': "' + dto.payload.text + '"'
                 , contextMessage: spk.util.buildNotificationContext([
                     dto.repo
@@ -46,6 +64,7 @@ spk.events.issueCommentEvent = (function () {
             };
 
         } else {
+            // This is the default IssueCommentEvent
 
             result = {
                 title: dto.actor.username + ' said on ' + dto.payload.issue.title
