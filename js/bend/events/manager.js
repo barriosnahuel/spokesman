@@ -19,6 +19,7 @@ spk.events.manager = (function () {
         //, {id: 'GollumEvent', event: spk.events.gollumEvent}
         , {id: 'IssueCommentEvent', event: spk.events.issueCommentEvent}
         , {id: 'IssuesEvent', event: spk.events.issuesEvent}
+        , {id: 'IssueCommentEvent+IssuesEvent', event: spk.events.issueCommentEvent}
         //, {id: 'MemberEvent', event: spk.events.memberEvent}
         //, {id: 'MembershipEvent', event: spk.events.membershipEvent}
         //, {id: 'PageBuildEvent', event: spk.events.pageBuildEvent}
@@ -30,7 +31,7 @@ spk.events.manager = (function () {
         //, {id: 'RepositoryEvent', event: spk.events.repositoryEvent}
         //, {id: 'StatusEvent', event: spk.events.statusEvent}
         //, {id: 'TeamAddEvent', event: spk.events.teamAddEvent}
-        //, {id: 'WatchEvent', event: spk.events.watchEvent}
+        , {id: 'WatchEvent', event: spk.events.watchEvent}
     ];
 
     var findEvent = function (type) {
@@ -44,7 +45,7 @@ spk.events.manager = (function () {
         }
 
         if (!event) {
-            console.log('Unknown event type %s', type);
+            console.warn('Unknown event type %s', type);
         }
 
         return event;
@@ -85,7 +86,11 @@ spk.events.manager = (function () {
     };
 
     var buildNotification = function (dto) {
-        return findEvent(dto.type).buildNotification(dto);
+        var result = findEvent(dto.type).buildNotification(dto);
+
+        result.id = dto.id;
+
+        return result;
     };
 
     var shouldProcess = function (dto) {

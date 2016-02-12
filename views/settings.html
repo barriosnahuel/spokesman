@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1>Spokesman settings page</h1>
+                <h1>Spokesman v1.0.0 - Settings page</h1>
                 <img class="pull-right" src="../img/megaphone17-128.png">
             </div>
         </div>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-success">CommitCommentEvent <span class="label label-primary pull-right">New</span></li>
+                        <li class="list-group-item list-group-item-success">CommitCommentEvent</li>
                         <li class="list-group-item list-group-item-success">CreateEvent</li>
                         <li class="list-group-item list-group-item-success">DeleteEvent</li>
                         <li class="list-group-item list-group-item-success">IssueCommentEvent</li>
@@ -197,6 +197,7 @@
                         <li class="list-group-item list-group-item-success">PullRequestReviewCommentEvent</li>
                         <li class="list-group-item list-group-item-success">PushEvent</li>
                         <li class="list-group-item list-group-item-success">ReleaseEvent</li>
+                        <li class="list-group-item list-group-item-success">WatchEvent <span class="label label-primary pull-right">New</span></li>
                     </ul>
                 </div>
             </div>
@@ -226,11 +227,17 @@
                         <li class="list-group-item disabled">RepositoryEvent</li>
                         <li class="list-group-item disabled">StatusEvent</li>
                         <li class="list-group-item disabled">TeamAddEvent</li>
-                        <li class="list-group-item disabled">WatchEvent</li>
                     </ul>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            Note: If you want to go deeper into what each kind of event represents then take a look to the <a
+                href="https://developer.github.com/v3/activity/events/types/" target="_blank">GitHub's documentation</a>.
         </div>
     </div>
 

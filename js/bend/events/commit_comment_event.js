@@ -19,7 +19,7 @@ spk.events.commitCommentEvent = (function () {
     var buildNotification = function (dto) {
         return {
             title: dto.actor.username + ' said on commit ' + dto.payload.commitId
-            , message: dto.payload.text
+            , message: '"' + dto.payload.text + '"'
             , contextMessage: spk.util.buildNotificationContext([
                 dto.repo
                 , dto.payload.file
