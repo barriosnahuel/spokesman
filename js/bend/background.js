@@ -117,16 +117,17 @@ var spk = spk || {};
             var mergeEvents = function (lastEventId, events) {
                 var mergedEvents = [];
                 var decrement = 1;
-                for (var i = events.length - 1; i >= 0; i -= decrement, decrement = 1) {
+                var mergedEventsQuantity;
+
+                for (var i = events.length - 1; i >= 0; i -= decrement, decrement = 1, mergedEventsQuantity = undefined) {
                     var currentEvent = events[i];
 
                     if (lastEventId && currentEvent.id <= lastEventId) {
                         console.debug('Skipping event %s because last read event is %s.', currentEvent.id, lastEventId);
                     } else {
-                        var mergedEventsQuantity;
 
                         if (!mergedEventsQuantity) {
-                            mergedEventsQuantity = spk.events.custom.issuesEvent.check(events, i, currentEvent);
+                            mergedEventsQuantity = spk.events.custom.issuesEvents.check(events, i, currentEvent);
                         }
 
                         if (mergedEventsQuantity) {
@@ -156,7 +157,7 @@ var spk = spk || {};
                     var mergedEvents = mergeEvents(storage.lastEventId, events);
 
                     var notifications = [];
-                    for (var i = mergedEvents.length - 1; i >= 0; i--) {
+                    for (var i = 0; i < mergedEvents.length; i++) {
                         var eachMergedEvent = mergedEvents[i];
 
                         var notification = processEvent(eachMergedEvent);
