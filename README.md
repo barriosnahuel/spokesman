@@ -96,6 +96,11 @@ Colors:
 - Opened: #6cc644
 - Closed: #bd2c00
 - Merged: #6e5494
+- Comments: #607d8b
+
+Sizes:
+- Single: 256px (original) ==> 200px (scaled-centered)
+- Double: 128px
 
 ### Used libraries
 
