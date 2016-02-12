@@ -130,6 +130,10 @@ var spk = spk || {};
                             mergedEventsQuantity = spk.events.custom.issuesEvents.check(events, i, currentEvent);
                         }
 
+                        if (!mergedEventsQuantity) {
+                            mergedEventsQuantity = spk.events.custom.pullRequestsEvents.check(events, i, currentEvent);
+                        }
+
                         if (mergedEventsQuantity) {
                             decrement = mergedEventsQuantity;
                         }

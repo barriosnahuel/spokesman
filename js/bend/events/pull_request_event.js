@@ -16,6 +16,7 @@ spk.events.pullRequestEvent = (function () {
             , deletions: event.payload.pull_request.deletions
             , author: '@' + event.payload.pull_request.user.login
             , link: event.payload.pull_request.html_url
+            , targetBranch: event.payload.pull_request.base.ref
         };
     };
 
@@ -39,6 +40,10 @@ spk.events.pullRequestEvent = (function () {
                 console.warn('Wow! We\'ve got a new PR action and it is NOT mapped a switch statement.');
                 icon = undefined;
                 break;
+        }
+
+        if (action === 'merged') {
+            action += ' into branch "' + dto.payload.targetBranch + '"';
         }
 
         return {
