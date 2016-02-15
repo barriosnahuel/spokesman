@@ -1,4 +1,5 @@
 {
+    "testing": true,
     "push_branches": [
         "master",
         "develop",
@@ -8,5 +9,44 @@
         "opened",
         "closed",
         "reopened"
+    ],
+    "enabled_events": [
+        "CommitCommentEvent",
+        "CreateEvent",
+        "DeleteEvent",
+        "WatchEvent"
+    ],
+    "supported_events": [
+        {
+            "event": "CommitCommentEvent"
+        },
+        {
+            "event": "CreateEvent"
+        },
+        {
+            "event": "DeleteEvent"
+        },
+        {
+            "event": "IssueCommentEvent"
+        },
+        {
+            "event": "IssuesEvent"
+        },
+        {
+            "event": "PullRequestEvent"
+        },
+        {
+            "event": "PullRequestReviewCommentEvent"
+        },
+        {
+            "event": "PushEvent"
+        },
+        {
+            "event": "ReleaseEvent"
+        },
+        {
+            "event": "WatchEvent",
+            "isNew": true
+        }
     ]
 }

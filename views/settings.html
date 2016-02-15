@@ -187,17 +187,7 @@
                     <h3 class="panel-title">Supported events <span class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span></h3>
                 </div>
                 <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-success">CommitCommentEvent</li>
-                        <li class="list-group-item list-group-item-success">CreateEvent</li>
-                        <li class="list-group-item list-group-item-success">DeleteEvent</li>
-                        <li class="list-group-item list-group-item-success">IssueCommentEvent</li>
-                        <li class="list-group-item list-group-item-success">IssuesEvent</li>
-                        <li class="list-group-item list-group-item-success">PullRequestEvent</li>
-                        <li class="list-group-item list-group-item-success">PullRequestReviewCommentEvent</li>
-                        <li class="list-group-item list-group-item-success">PushEvent</li>
-                        <li class="list-group-item list-group-item-success">ReleaseEvent</li>
-                        <li class="list-group-item list-group-item-success">WatchEvent <span class="label label-primary pull-right">New</span></li>
+                    <ul class="list-group" id="supportedEvents">
                     </ul>
                 </div>
             </div>
@@ -268,6 +258,21 @@
             <input type="text" class="form-control" placeholder="{{:placeholder}}" {{if name}}value="{{:name}}"{{/if}}>
             <span class="glyphicon glyphicon-ok spk-input-feedback" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </div>
+    </li>
+
+
+</script>
+
+<script id="supportedEventTemplate" type="text/x-jsrender">
+    <li class="list-group-item list-group-item-success">
+        <div class="spk-supported-event">
+            <div class="pull-left">
+                {{:event}} {{if isNew}} <span class="label label-warning">New</span> {{/if}}
+            </div>
+            <div class="pull-right">
+                <input type="checkbox" {{if enabled}} checked {{/if}} class="pull-right" value="{{:event}}">
+            </div>
         </div>
     </li>
 

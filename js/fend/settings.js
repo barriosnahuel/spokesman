@@ -6,6 +6,7 @@ var spk = spk || {};
 $(document).ready(function () {
 
     $.templates("branchInput", "#branchInputTemplate");
+    $.templates("supportedEvent", "#supportedEventTemplate");
 
     var $username = $('#username');
     var $accessToken = $('#accessToken');
@@ -15,6 +16,7 @@ $(document).ready(function () {
     var $branchesList = $('#branches');
     var branches;
     var issues;
+    var enabledEvents;
 
     render();
     addListeners();
@@ -37,30 +39,32 @@ $(document).ready(function () {
         chrome.storage.sync.get(undefined, function (storage) {
             branches = storage.branches || [];
             issues = storage.issues || [];
+            enabledEvents = storage.enabledEvents || [];
 
-            if (!storage.branches || !storage.issues) {
-                $.ajax({
-                    url: '../properties.json',
-                    dataType: 'json',
-                    async: false
-                }).done(function (properties) {
-                    if (!storage.branches) {
-                        branches = properties.push_branches;
-                        saveBranches();
-                    }
+            $.ajax({
+                url: '../properties.json',
+                dataType: 'json',
+                async: false
+            }).done(function (properties) {
+                if (!storage.branches) {
+                    branches = properties.push_branches;
+                    saveBranches();
+                }
 
-                    if (!storage.issues) {
-                        issues = properties.issues_action;
-                        saveIssues();
-                    }
+                if (!storage.issues) {
+                    issues = properties.issues_action;
+                    saveIssues();
+                }
 
-                    addBranches();
-                    addIssuesActions();
-                });
-            } else {
+                if (!storage.enabledEvents) {
+                    enabledEvents = properties.enabled_events;
+                    saveEnabledEvents();
+                }
+
                 addBranches();
                 addIssuesActions();
-            }
+                addSupportedEvents(properties.supported_events);
+            });
 
             function addBranches() {
                 for (var i = 0; i < branches.length; i++) {
@@ -93,6 +97,36 @@ $(document).ready(function () {
                         }
 
                         saveIssues();
+                    });
+                }
+            }
+
+            function addSupportedEvents(supportedEvents) {
+                console.debug('==> addSupportedEvents');
+
+                var $list = $('#supportedEvents');
+
+                for (var i = 0; i < supportedEvents.length; i++) {
+                    var eachEvent = supportedEvents[i];
+
+                    $list.append($.render.supportedEvent({
+                        'event': eachEvent.event
+                        , 'enabled': enabledEvents.indexOf(eachEvent.event) >= 0
+                        , 'isNew': eachEvent.isNew
+                    }));
+
+                    var $checkbox = $list.find('input:last-child');
+                    $checkbox.bootstrapToggle();
+                    $checkbox.change(function () {
+                        var $this = $(this);
+
+                        if ($this.prop('checked')) {
+                            enabledEvents.push($this.val());
+                        } else {
+                            enabledEvents.splice(issues.indexOf($this.val()), 1);
+                        }
+
+                        console.dir(enabledEvents);
                     });
                 }
             }
@@ -192,6 +226,14 @@ $(document).ready(function () {
 
     var saveIssues = function (callback) {
         chrome.storage.sync.set({'issues': issues}, function () {
+            if (callback) {
+                callback();
+            }
+        });
+    };
+
+    var saveEnabledEvents = function (callback) {
+        chrome.storage.sync.set({'enabledEvents': enabledEvents}, function () {
             if (callback) {
                 callback();
             }
