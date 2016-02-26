@@ -123,8 +123,10 @@ $(document).ready(function () {
                         if ($this.prop('checked')) {
                             enabledEvents.push($this.val());
                         } else {
-                            enabledEvents.splice(issues.indexOf($this.val()), 1);
+                            enabledEvents.splice(enabledEvents.indexOf($this.val()), 1);
                         }
+
+                        saveEnabledEvents();
 
                         console.dir(enabledEvents);
                     });
