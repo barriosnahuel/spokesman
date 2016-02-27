@@ -14,6 +14,12 @@
         "CommitCommentEvent",
         "CreateEvent",
         "DeleteEvent",
+        "IssueCommentEvent",
+        "IssuesEvent",
+        "PullRequestEvent",
+        "PullRequestReviewCommentEvent",
+        "PushEvent",
+        "ReleaseEvent",
         "WatchEvent"
     ],
     "supported_events": [

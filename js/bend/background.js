@@ -145,6 +145,24 @@ var spk = spk || {};
                 return mergedEvents;
             };
 
+            /**
+             * Filter events with a type that there is NOT in the enabledEventTypes array.
+             * @param enabledEventTypes Event types that are currently enabled in the settings page.
+             * @param events Events from GitHub API response.
+             * @returns {Array} an array of events that the
+             */
+            var filterDisabledEvents = function (enabledEventTypes, events) {
+                var filteredEvents = [];
+                for (var i = 0; i < events.length; i++) {
+                    var eachEvent = events[i];
+                    if (enabledEventTypes.indexOf(eachEvent.type) >= 0) {
+                        filteredEvents.push(eachEvent);
+                    }
+                }
+
+                return filteredEvents;
+            };
+
             if (err) {
                 console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
@@ -158,7 +176,15 @@ var spk = spk || {};
                         spk.properties.issues_action = storage.issues;
                     }
 
-                    var mergedEvents = mergeEvents(storage.lastEventId, events);
+                    if (storage.enabledEvents) {
+                        spk.properties.enabled_events = storage.enabledEvents;
+                    } else {
+                        chrome.storage.sync.set({'enabledEvents': spk.properties.enabled_events}, undefined);
+                    }
+
+                    var filteredEvents = filterDisabledEvents(spk.properties.enabled_events, events);
+
+                    var mergedEvents = mergeEvents(storage.lastEventId, filteredEvents);
 
                     var notifications = [];
                     for (var i = 0; i < mergedEvents.length; i++) {
