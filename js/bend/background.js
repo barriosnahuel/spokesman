@@ -15,7 +15,6 @@ var spk = spk || {};
         };
 
         console.info('Running onInstalled, reason: %s', details.reason);
-
         console.info('Previous version: %s', details.previousVersion);
 
         if (details.reason === 'install') {
@@ -43,7 +42,6 @@ var spk = spk || {};
 
     var saveQueue = function (queue) {
         chrome.storage.local.set({'queue': queue}, undefined);
-        console.debug('Saved queue w/ size: %d', queue.length);
     };
 
     var scheduleNotifications = function (notifications) {
@@ -115,8 +113,6 @@ var spk = spk || {};
     };
 
     var runAPICall = function () {
-        console.debug('==> runAPICall...');
-
         console.info('Checking for new notifications...');
 
         spk.lib.getEvents(function (err, events) {
@@ -129,10 +125,7 @@ var spk = spk || {};
                 for (var i = events.length - 1; i >= 0; i -= decrement, decrement = 1, mergedEventsQuantity = undefined) {
                     var currentEvent = events[i];
 
-                    if (lastEventId && currentEvent.id <= lastEventId) {
-                        console.debug('Skipping event %s because last read event is %s.', currentEvent.id, lastEventId);
-                    } else {
-
+                    if (!lastEventId || currentEvent.id > lastEventId) {
                         if (!mergedEventsQuantity) {
                             mergedEventsQuantity = spk.events.custom.issuesEvents.check(events, i, currentEvent);
                         }
@@ -222,7 +215,6 @@ var spk = spk || {};
                         }
                     }
 
-                    console.debug('Created %d/%d notifications based on API response.', notifications.length, events.length);
                     scheduleNotifications(notifications);
 
                     console.info('Last event/notification read %s', events[0].id);
@@ -233,12 +225,7 @@ var spk = spk || {};
     };
 
     var processQueue = function () {
-        console.debug('==> processQueue...');
-
-        if (isProcessingQueue) {
-            console.debug('Queue is already being processed.')
-        } else {
-            console.debug('Start processing queue because of a new alarm.');
+        if (!isProcessingQueue) {
             dequeue();
         }
     };

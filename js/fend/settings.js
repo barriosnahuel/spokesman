@@ -143,8 +143,6 @@ $(document).ready(function () {
             }
 
             function addSupportedEvents() {
-                console.debug('==> addSupportedEvents');
-
                 var $list = $('#supportedEvents');
 
                 for (var i = 0; i < supportedEvents.length; i++) {
