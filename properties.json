@@ -10,48 +10,46 @@
         "closed",
         "reopened"
     ],
-    "enabled_events": [
-        "CommitCommentEvent",
-        "CreateEvent",
-        "DeleteEvent",
-        "IssueCommentEvent",
-        "IssuesEvent",
-        "PullRequestEvent",
-        "PullRequestReviewCommentEvent",
-        "PushEvent",
-        "ReleaseEvent",
-        "WatchEvent"
-    ],
     "supported_events": [
         {
-            "event": "CommitCommentEvent"
+            "event": "CommitCommentEvent",
+            "enabled": true
         },
         {
-            "event": "CreateEvent"
+            "event": "CreateEvent",
+            "enabled": true
         },
         {
-            "event": "DeleteEvent"
+            "event": "DeleteEvent",
+            "enabled": true
         },
         {
-            "event": "IssueCommentEvent"
+            "event": "IssueCommentEvent",
+            "enabled": true
         },
         {
-            "event": "IssuesEvent"
+            "event": "IssuesEvent",
+            "enabled": true
         },
         {
-            "event": "PullRequestEvent"
+            "event": "PullRequestEvent",
+            "enabled": true
         },
         {
-            "event": "PullRequestReviewCommentEvent"
+            "event": "PullRequestReviewCommentEvent",
+            "enabled": true
         },
         {
-            "event": "PushEvent"
+            "event": "PushEvent",
+            "enabled": true
         },
         {
-            "event": "ReleaseEvent"
+            "event": "ReleaseEvent",
+            "enabled": true
         },
         {
             "event": "WatchEvent",
+            "enabled": true,
             "isNew": true
         }
     ]

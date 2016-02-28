@@ -146,16 +146,35 @@ var spk = spk || {};
             };
 
             /**
+             * This method is duplicated in settings.js
+             * @param supportedEvents
+             * @param event
+             * @returns {*}
+             */
+            function findEvent(supportedEvents, event) {
+                var result;
+                for (var j = 0; j < supportedEvents.length; j++) {
+                    var eachSupportedEventType = supportedEvents[j];
+                    if (eachSupportedEventType.event === event) {
+                        result = eachSupportedEventType;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            /**
              * Filter events with a type that there is NOT in the enabledEventTypes array.
              * @param enabledEventTypes Event types that are currently enabled in the settings page.
              * @param events Events from GitHub API response.
-             * @returns {Array} an array of events that the
+             * @returns {Array} an array of events that the user has set as enabled.
              */
-            var filterDisabledEvents = function (enabledEventTypes, events) {
+            var getEnabledEvents = function (enabledEventTypes, events) {
                 var filteredEvents = [];
                 for (var i = 0; i < events.length; i++) {
                     var eachEvent = events[i];
-                    if (enabledEventTypes.indexOf(eachEvent.type) >= 0) {
+                    var eventType = findEvent(enabledEventTypes, eachEvent.type);
+                    if (eventType && eventType.enabled) {
                         filteredEvents.push(eachEvent);
                     }
                 }
@@ -176,15 +195,15 @@ var spk = spk || {};
                         spk.properties.issues_action = storage.issues;
                     }
 
-                    if (storage.enabledEvents) {
-                        spk.properties.enabled_events = storage.enabledEvents;
+                    if (storage.supportedEvents) {
+                        spk.properties.supported_events = storage.supportedEvents;
                     } else {
-                        chrome.storage.sync.set({'enabledEvents': spk.properties.enabled_events}, undefined);
+                        chrome.storage.sync.set({'supportedEvents': spk.properties.supported_events}, undefined);
                     }
 
-                    var filteredEvents = filterDisabledEvents(spk.properties.enabled_events, events);
+                    var enabledEvents = getEnabledEvents(spk.properties.supported_events, events);
 
-                    var mergedEvents = mergeEvents(storage.lastEventId, filteredEvents);
+                    var mergedEvents = mergeEvents(storage.lastEventId, enabledEvents);
 
                     var notifications = [];
                     for (var i = 0; i < mergedEvents.length; i++) {
@@ -212,7 +231,7 @@ var spk = spk || {};
         if (isProcessingQueue) {
             console.debug('Queue is already being processed.')
         } else {
-            console.debug('Start queue process because of a new alarm.');
+            console.debug('Start processing queue because of a new alarm.');
             dequeue();
         }
     };

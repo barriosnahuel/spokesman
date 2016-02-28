@@ -16,7 +16,7 @@ $(document).ready(function () {
     var $branchesList = $('#branches');
     var branches;
     var issues;
-    var enabledEvents;
+    var supportedEvents;
 
     render();
     addListeners();
@@ -39,7 +39,7 @@ $(document).ready(function () {
         chrome.storage.sync.get(undefined, function (storage) {
             branches = storage.branches || [];
             issues = storage.issues || [];
-            enabledEvents = storage.enabledEvents || [];
+            supportedEvents = storage.supportedEvents;
 
             $.ajax({
                 url: '../properties.json',
@@ -56,14 +56,14 @@ $(document).ready(function () {
                     saveIssues();
                 }
 
-                if (!storage.enabledEvents) {
-                    enabledEvents = properties.enabled_events;
+                if (!supportedEvents) {
+                    supportedEvents = properties.supported_events;
                     saveEnabledEvents();
                 }
 
                 addBranches();
                 addIssuesActions();
-                addSupportedEvents(properties.supported_events);
+                addSupportedEvents();
             });
 
             function addBranches() {
@@ -101,7 +101,25 @@ $(document).ready(function () {
                 }
             }
 
-            function addSupportedEvents(supportedEvents) {
+            /**
+             * This method is duplicated in background.js
+             * @param supportedEvents
+             * @param event
+             * @returns {*}
+             */
+            function findEvent(supportedEvents, event) {
+                var result;
+                for (var j = 0; j < supportedEvents.length; j++) {
+                    var eachSupportedEventType = supportedEvents[j];
+                    if (eachSupportedEventType.event === event) {
+                        result = eachSupportedEventType;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            function addSupportedEvents() {
                 console.debug('==> addSupportedEvents');
 
                 var $list = $('#supportedEvents');
@@ -109,26 +127,19 @@ $(document).ready(function () {
                 for (var i = 0; i < supportedEvents.length; i++) {
                     var eachEvent = supportedEvents[i];
 
-                    $list.append($.render.supportedEvent({
-                        'event': eachEvent.event
-                        , 'enabled': enabledEvents.indexOf(eachEvent.event) >= 0
-                        , 'isNew': eachEvent.isNew
-                    }));
+                    $list.append($.render.supportedEvent(eachEvent));
 
                     var $checkbox = $list.find('input:last-child');
                     $checkbox.bootstrapToggle();
                     $checkbox.change(function () {
                         var $this = $(this);
 
-                        if ($this.prop('checked')) {
-                            enabledEvents.push($this.val());
-                        } else {
-                            enabledEvents.splice(enabledEvents.indexOf($this.val()), 1);
-                        }
+                        var eventType = findEvent(supportedEvents, $this.val());
+                        eventType.enabled = $this.prop('checked');
 
                         saveEnabledEvents();
 
-                        console.dir(enabledEvents);
+                        console.dir(supportedEvents);
                     });
                 }
             }
@@ -235,7 +246,7 @@ $(document).ready(function () {
     };
 
     var saveEnabledEvents = function (callback) {
-        chrome.storage.sync.set({'enabledEvents': enabledEvents}, function () {
+        chrome.storage.sync.set({'supportedEvents': supportedEvents}, function () {
             if (callback) {
                 callback();
             }
