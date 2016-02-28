@@ -137,6 +137,16 @@ $(document).ready(function () {
                         var eventType = findEvent(supportedEvents, $this.val());
                         eventType.enabled = $this.prop('checked');
 
+                        if (_gaq) {
+                            if (eventType.enabled) {
+                                _gaq.push(['_trackEvent', 'Event type', 'Enabled', eventType.event]);
+                            } else {
+                                _gaq.push(['_trackEvent', 'Event type', 'Disabled', eventType.event]);
+                            }
+                        } else {
+                            console.warn('Analytics tracking is NOT working');
+                        }
+
                         saveEnabledEvents();
 
                         console.dir(supportedEvents);
