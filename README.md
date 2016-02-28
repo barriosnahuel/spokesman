@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/barriosnahuel/spokesman.png?label=ready&title=Ready)](https://waffle.io/barriosnahuel/spokesman)
 # spokesman
 It's a GitHub's notifications interpreter for Chrome
 
