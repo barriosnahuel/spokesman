@@ -8,13 +8,20 @@ var spk = spk || {};
     var isProcessingQueue;
 
     var onExtensionInstalledOrUpdated = function (details) {
+        var openSettingsPage = function (showChangelog) {
+            chrome.tabs.create({
+                url: 'views/settings.html' + (showChangelog ? '#changelog' : '')
+            }, undefined);
+        };
+
         console.info('Running onInstalled, reason: %s', details.reason);
+
         console.info('Previous version: %s', details.previousVersion);
 
         if (details.reason === 'install') {
-            chrome.tabs.create({
-                url: 'views/settings.html'
-            }, undefined);
+            openSettingsPage();
+        } else if (details.reason === 'update' && details.previousVersion === '1.0.1') {
+            openSettingsPage(true);
         }
     };
 

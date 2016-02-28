@@ -18,6 +18,11 @@ $(document).ready(function () {
     var issues;
     var supportedEvents;
 
+    var showChangelog = (function (url) {
+        var changelogSuffix = '#changelog';
+        return url.indexOf(changelogSuffix, url.length - changelogSuffix.length) !== -1;
+    }(window.location.href));
+
     render();
     addListeners();
 
@@ -65,6 +70,24 @@ $(document).ready(function () {
                 addIssuesActions();
                 addSupportedEvents();
             });
+
+            if (showChangelog) {
+                var $changelog = $('.spk-supported-event:first>.pull-right');
+                $changelog.popover({
+                    title: 'NEW in v1.1.0'
+                    , content: 'From now on you can disable each event type if you don\'t want to keep receiving notifications.'
+                    , placement: 'top'
+                    , trigger: 'hover'
+                    , delay: {
+                        "show": 0
+                        , "hide": 1000
+                    }
+                }).on('hidden.bs.popover', function () {
+                    $changelog.popover('destroy');
+                }).popover('show');
+
+                $('html,body').animate({scrollTop: $('div.popover').offset().top});
+            }
 
             function addBranches() {
                 for (var i = 0; i < branches.length; i++) {
@@ -136,16 +159,6 @@ $(document).ready(function () {
 
                         var eventType = findEvent(supportedEvents, $this.val());
                         eventType.enabled = $this.prop('checked');
-
-                        if (_gaq) {
-                            if (eventType.enabled) {
-                                _gaq.push(['_trackEvent', 'Event type', 'Enabled', eventType.event]);
-                            } else {
-                                _gaq.push(['_trackEvent', 'Event type', 'Disabled', eventType.event]);
-                            }
-                        } else {
-                            console.warn('Analytics tracking is NOT working');
-                        }
 
                         saveEnabledEvents();
 
