@@ -1,0 +1,55 @@
+{
+    "push_branches": [
+        "master",
+        "develop",
+        "development"
+    ],
+    "issues_action": [
+        "opened",
+        "closed",
+        "reopened"
+    ],
+    "supported_events": [
+        {
+            "event": "CommitCommentEvent",
+            "enabled": true
+        },
+        {
+            "event": "CreateEvent",
+            "enabled": true
+        },
+        {
+            "event": "DeleteEvent",
+            "enabled": true
+        },
+        {
+            "event": "IssueCommentEvent",
+            "enabled": true
+        },
+        {
+            "event": "IssuesEvent",
+            "enabled": true
+        },
+        {
+            "event": "PullRequestEvent",
+            "enabled": true
+        },
+        {
+            "event": "PullRequestReviewCommentEvent",
+            "enabled": true
+        },
+        {
+            "event": "PushEvent",
+            "enabled": true
+        },
+        {
+            "event": "ReleaseEvent",
+            "enabled": true
+        },
+        {
+            "event": "WatchEvent",
+            "enabled": true,
+            "isNew": true
+        }
+    ]
+}

@@ -8,6 +8,10 @@ form div.input-group {
     margin-top: 20px;
 }
 
+.glyphicon.glyphicon-remove:hover {
+    cursor: pointer;
+}
+
 .spk-inner-addon > .glyphicon {
     z-index: 2;
 }
@@ -66,4 +70,12 @@ form div.input-group .form-control:not(:first-child):not(:last-child) {
 
 #issues > li > ul > li {
     min-width: 160px;
+}
+
+.spk-supported-event {
+    height: 34px;
+}
+
+.spk-supported-event > div:first-child {
+    margin-top: 7px;
 }

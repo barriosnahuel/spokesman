@@ -8,13 +8,19 @@ var spk = spk || {};
     var isProcessingQueue;
 
     var onExtensionInstalledOrUpdated = function (details) {
+        var openSettingsPage = function (showChangelog) {
+            chrome.tabs.create({
+                url: 'views/settings.html' + (showChangelog ? '#changelog' : '')
+            }, undefined);
+        };
+
         console.info('Running onInstalled, reason: %s', details.reason);
         console.info('Previous version: %s', details.previousVersion);
 
         if (details.reason === 'install') {
-            chrome.tabs.create({
-                url: 'views/settings.html'
-            }, undefined);
+            openSettingsPage();
+        } else if (details.reason === 'update' && details.previousVersion === '1.0.1') {
+            openSettingsPage(true);
         }
     };
 
@@ -36,7 +42,6 @@ var spk = spk || {};
 
     var saveQueue = function (queue) {
         chrome.storage.local.set({'queue': queue}, undefined);
-        console.debug('Saved queue w/ size: %d', queue.length);
     };
 
     var scheduleNotifications = function (notifications) {
@@ -108,8 +113,6 @@ var spk = spk || {};
     };
 
     var runAPICall = function () {
-        console.debug('==> runAPICall...');
-
         console.info('Checking for new notifications...');
 
         spk.lib.getEvents(function (err, events) {
@@ -122,10 +125,7 @@ var spk = spk || {};
                 for (var i = events.length - 1; i >= 0; i -= decrement, decrement = 1, mergedEventsQuantity = undefined) {
                     var currentEvent = events[i];
 
-                    if (lastEventId && currentEvent.id <= lastEventId) {
-                        console.debug('Skipping event %s because last read event is %s.', currentEvent.id, lastEventId);
-                    } else {
-
+                    if (!lastEventId || currentEvent.id > lastEventId) {
                         if (!mergedEventsQuantity) {
                             mergedEventsQuantity = spk.events.custom.issuesEvents.check(events, i, currentEvent);
                         }
@@ -145,6 +145,43 @@ var spk = spk || {};
                 return mergedEvents;
             };
 
+            /**
+             * This method is duplicated in settings.js
+             * @param supportedEvents
+             * @param event
+             * @returns {*}
+             */
+            function findEvent(supportedEvents, event) {
+                var result;
+                for (var j = 0; j < supportedEvents.length; j++) {
+                    var eachSupportedEventType = supportedEvents[j];
+                    if (eachSupportedEventType.event === event) {
+                        result = eachSupportedEventType;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            /**
+             * Filter events with a type that there is NOT in the enabledEventTypes array.
+             * @param enabledEventTypes Event types that are currently enabled in the settings page.
+             * @param events Events from GitHub API response.
+             * @returns {Array} an array of events that the user has set as enabled.
+             */
+            var getEnabledEvents = function (enabledEventTypes, events) {
+                var filteredEvents = [];
+                for (var i = 0; i < events.length; i++) {
+                    var eachEvent = events[i];
+                    var eventType = findEvent(enabledEventTypes, eachEvent.type);
+                    if (eventType && eventType.enabled) {
+                        filteredEvents.push(eachEvent);
+                    }
+                }
+
+                return filteredEvents;
+            };
+
             if (err) {
                 console.error('Can\'t get GitHub\'s events: %s', err);
             } else {
@@ -158,7 +195,15 @@ var spk = spk || {};
                         spk.properties.issues_action = storage.issues;
                     }
 
-                    var mergedEvents = mergeEvents(storage.lastEventId, events);
+                    if (storage.supportedEvents) {
+                        spk.properties.supported_events = storage.supportedEvents;
+                    } else {
+                        chrome.storage.sync.set({'supportedEvents': spk.properties.supported_events}, undefined);
+                    }
+
+                    var enabledEvents = getEnabledEvents(spk.properties.supported_events, events);
+
+                    var mergedEvents = mergeEvents(storage.lastEventId, enabledEvents);
 
                     var notifications = [];
                     for (var i = 0; i < mergedEvents.length; i++) {
@@ -170,7 +215,6 @@ var spk = spk || {};
                         }
                     }
 
-                    console.debug('Created %d/%d notifications based on API response.', notifications.length, events.length);
                     scheduleNotifications(notifications);
 
                     console.info('Last event/notification read %s', events[0].id);
@@ -181,12 +225,7 @@ var spk = spk || {};
     };
 
     var processQueue = function () {
-        console.debug('==> processQueue...');
-
-        if (isProcessingQueue) {
-            console.debug('Queue is already being processed.')
-        } else {
-            console.debug('Start queue process because of a new alarm.');
+        if (!isProcessingQueue) {
             dequeue();
         }
     };

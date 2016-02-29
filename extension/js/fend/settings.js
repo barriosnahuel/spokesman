@@ -6,6 +6,7 @@ var spk = spk || {};
 $(document).ready(function () {
 
     $.templates("branchInput", "#branchInputTemplate");
+    $.templates("supportedEvent", "#supportedEventTemplate");
 
     var $username = $('#username');
     var $accessToken = $('#accessToken');
@@ -15,6 +16,12 @@ $(document).ready(function () {
     var $branchesList = $('#branches');
     var branches;
     var issues;
+    var supportedEvents;
+
+    var showChangelog = (function (url) {
+        var changelogSuffix = '#changelog';
+        return url.indexOf(changelogSuffix, url.length - changelogSuffix.length) !== -1;
+    }(window.location.href));
 
     render();
     addListeners();
@@ -37,29 +44,49 @@ $(document).ready(function () {
         chrome.storage.sync.get(undefined, function (storage) {
             branches = storage.branches || [];
             issues = storage.issues || [];
+            supportedEvents = storage.supportedEvents;
 
-            if (!storage.branches || !storage.issues) {
-                $.ajax({
-                    url: '../properties.json',
-                    dataType: 'json',
-                    async: false
-                }).done(function (properties) {
-                    if (!storage.branches) {
-                        branches = properties.push_branches;
-                        saveBranches();
-                    }
+            $.ajax({
+                url: '../properties.json',
+                dataType: 'json',
+                async: false
+            }).done(function (properties) {
+                if (!storage.branches) {
+                    branches = properties.push_branches;
+                    saveBranches();
+                }
 
-                    if (!storage.issues) {
-                        issues = properties.issues_action;
-                        saveIssues();
-                    }
+                if (!storage.issues) {
+                    issues = properties.issues_action;
+                    saveIssues();
+                }
 
-                    addBranches();
-                    addIssuesActions();
-                });
-            } else {
+                if (!supportedEvents) {
+                    supportedEvents = properties.supported_events;
+                    saveEnabledEvents();
+                }
+
                 addBranches();
                 addIssuesActions();
+                addSupportedEvents();
+            });
+
+            if (showChangelog) {
+                var $changelog = $('.spk-supported-event:first>.pull-right');
+                $changelog.popover({
+                    title: 'NEW in v1.1.0'
+                    , content: 'From now on you can disable each event type if you don\'t want to keep receiving notifications.'
+                    , placement: 'top'
+                    , trigger: 'hover'
+                    , delay: {
+                        "show": 0
+                        , "hide": 1000
+                    }
+                }).on('hidden.bs.popover', function () {
+                    $changelog.popover('destroy');
+                }).popover('show');
+
+                $('html,body').animate({scrollTop: $('div.popover').offset().top});
             }
 
             function addBranches() {
@@ -93,6 +120,47 @@ $(document).ready(function () {
                         }
 
                         saveIssues();
+                    });
+                }
+            }
+
+            /**
+             * This method is duplicated in background.js
+             * @param supportedEvents
+             * @param event
+             * @returns {*}
+             */
+            function findEvent(supportedEvents, event) {
+                var result;
+                for (var j = 0; j < supportedEvents.length; j++) {
+                    var eachSupportedEventType = supportedEvents[j];
+                    if (eachSupportedEventType.event === event) {
+                        result = eachSupportedEventType;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            function addSupportedEvents() {
+                var $list = $('#supportedEvents');
+
+                for (var i = 0; i < supportedEvents.length; i++) {
+                    var eachEvent = supportedEvents[i];
+
+                    $list.append($.render.supportedEvent(eachEvent));
+
+                    var $checkbox = $list.find('input:last-child');
+                    $checkbox.bootstrapToggle();
+                    $checkbox.change(function () {
+                        var $this = $(this);
+
+                        var eventType = findEvent(supportedEvents, $this.val());
+                        eventType.enabled = $this.prop('checked');
+
+                        saveEnabledEvents();
+
+                        console.dir(supportedEvents);
                     });
                 }
             }
@@ -192,6 +260,14 @@ $(document).ready(function () {
 
     var saveIssues = function (callback) {
         chrome.storage.sync.set({'issues': issues}, function () {
+            if (callback) {
+                callback();
+            }
+        });
+    };
+
+    var saveEnabledEvents = function (callback) {
+        chrome.storage.sync.set({'supportedEvents': supportedEvents}, function () {
             if (callback) {
                 callback();
             }

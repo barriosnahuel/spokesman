@@ -7,6 +7,12 @@ It's a GitHub's notifications interpreter for Chrome
 [![Code Climate](https://codeclimate.com/github/barriosnahuel/spokesman/badges/gpa.svg)](https://codeclimate.com/github/barriosnahuel/spokesman)
 [![Issue Count](https://codeclimate.com/github/barriosnahuel/spokesman/badges/issue_count.svg)](https://codeclimate.com/github/barriosnahuel/spokesman)
 
+## Project status
+
+[![Throughput Graph](https://graphs.waffle.io/barriosnahuel/spokesman/throughput.svg)](https://waffle.io/barriosnahuel/spokesman/metrics)
+
+Working on: [![Issues ready to take](https://badge.waffle.io/barriosnahuel/spokesman.png?label=ready&title=Ready)](https://waffle.io/barriosnahuel/spokesman)
+
 ## Screenshots
 
 See [listing](https://goo.gl/vBtHnG) in Chrome's store.
@@ -48,33 +54,15 @@ is not present, then it fails and log:
 
 1. Clone this repo in your favourite directory.
 2. Open Chrome and go to `chrome://extensions`
-3. Assure **Developer mode** isAdded  checked, if not then check it.
-4. Click on **Load unpacked extension**, then select the root directory of the cloned repository.
+3. Assure **Developer mode** is checked, if not then check it.
+4. Click on **Load unpacked extension**, then select the `extension` directory of the cloned repository.
 5. Setup your username and personal access token on the settings page.
 
-**Important:** Take into account that for private repos your access token *must* have the `repo` permission enabled.
+**Important:** Take into account that for private repositories your access token *must* have the `repo` permission enabled.
 
 ### Configure properties file
 Edit `properties.json` file in the root directory (just next to this file) and add
  - `"testing": true` <= It's an important flag to prevent checking for new events once a minute.
-
-Sample file:
-
-```json
-{
-    "testing": true,
-    "push_branches": [
-        "master",
-        "develop",
-        "development"
-    ],
-    "issues_action": [
-        "opened",
-        "closed",
-        "reopened"
-    ]
-}
-```
 
 ### icons
 
