@@ -1,5 +1,4 @@
 {
-    "testing": true,
     "push_branches": [
         "master",
         "develop",
