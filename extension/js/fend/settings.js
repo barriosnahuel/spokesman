@@ -159,8 +159,6 @@ $(document).ready(function () {
                         eventType.enabled = $this.prop('checked');
 
                         saveEnabledEvents();
-
-                        console.dir(supportedEvents);
                     });
                 }
             }
