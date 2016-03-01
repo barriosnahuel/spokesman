@@ -3,7 +3,7 @@
  * Created by Nahuel Barrios on 29/02/16.
  */
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-32410648-9']);
+_gaq.push(['_setAccount', 'UA-XXXX-9']);
 _gaq.push(['_trackPageview']);
 
 /**
