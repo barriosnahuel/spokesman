@@ -84,6 +84,7 @@ $(document).ready(function () {
                     }
                 }).on('hidden.bs.popover', function () {
                     $changelog.popover('destroy');
+                    _gaq.push(['_trackEvent', 'Changelog', 'Closed']);
                 }).popover('show');
 
                 $('html,body').animate({scrollTop: $('div.popover').offset().top});
@@ -115,8 +116,10 @@ $(document).ready(function () {
 
                         if ($this.prop('checked')) {
                             issues.push($this.val());
+                            _gaq.push(['_trackEvent', 'Issues', 'Enabled', $this.val()]);
                         } else {
                             issues.splice(issues.indexOf($this.val()), 1);
+                            _gaq.push(['_trackEvent', 'Issues', 'Disabled', $this.val()]);
                         }
 
                         saveIssues();
@@ -160,7 +163,11 @@ $(document).ready(function () {
 
                         saveEnabledEvents();
 
-                        console.dir(supportedEvents);
+                        if (eventType.enabled) {
+                            _gaq.push(['_trackEvent', 'Events', 'Enabled', eventType.event]);
+                        } else {
+                            _gaq.push(['_trackEvent', 'Events', 'Disabled', eventType.event]);
+                        }
                     });
                 }
             }
@@ -222,6 +229,8 @@ $(document).ready(function () {
                 }).filter(function (item) {
                     return item !== '';
                 });
+
+                _gaq.push(['_trackEvent', 'Branches', 'Added', branch]);
 
                 saveBranches(function () {
                     $check.show();
