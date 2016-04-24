@@ -1,4 +1,6 @@
 {
+    "testing": false,
+    "github_web": "https://github.com/",
     "push_branches": [
         "master",
         "develop",

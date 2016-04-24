@@ -10,7 +10,7 @@ spk.events.deleteEvent = (function () {
         return {
             branch: event.payload.ref
             , type: event.payload.ref_type
-            , link: 'https://github.com/' + event.repo.name + (event.payload.ref_type === 'tag' ? '/tags' : '/branches')
+            , link: spk.properties.github_web + event.repo.name + (event.payload.ref_type === 'tag' ? '/tags' : '/branches')
         };
     };
 
