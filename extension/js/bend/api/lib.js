@@ -6,16 +6,16 @@ spk.lib = (function () {
 
     var getEvents = function (callback) {
 
-        chrome.storage.sync.get('username', function (localStorage) {
-            if (localStorage.username) {
+        chrome.storage.sync.get('username', function (syncedStorage) {
+            if (syncedStorage.username) {
 
-                chrome.storage.local.get('accessToken', function (syncedStorage) {
+                chrome.storage.local.get('accessToken', function (localStorage) {
 
-                    if (syncedStorage.accessToken) {
+                    if (localStorage.accessToken) {
                         $.ajax({
-                            url: 'https://api.github.com/users/' + localStorage.username + '/received_events',
+                            url: 'https://api.github.com/users/' + syncedStorage.username + '/received_events',
                             beforeSend: function (jqXHR) {
-                                jqXHR.setRequestHeader('Authorization', 'token ' + syncedStorage.accessToken);
+                                jqXHR.setRequestHeader('Authorization', 'token ' + localStorage.accessToken);
                             }
                         }).done(function (data, textStatus, jqXHR) {
                             console.info('GitHub\'s API called OK');

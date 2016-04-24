@@ -63,15 +63,16 @@ spk.events.manager = (function () {
     };
 
     /**
-     * ToDo: Add documentation!!
-     * @param event
+     * Parse basic data required for any kind of event, and also parses each specific event's data by calling the manager.js.
+     * @param event The event to parse.
+     * @param username The login name of the configured user.
      */
-    var parse = function (event) {
+    var parse = function (event, username) {
         var result;
 
         var eventManager = findEvent(event.type);
         if (eventManager) {
-            var payload = eventManager.parse(event);
+            var payload = eventManager.parse(event, username);
 
             if (payload) {
                 var dto = parseBasicData(event);
