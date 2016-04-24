@@ -99,5 +99,6 @@ Sizes:
 
 ### Publish process
 1. Be sure to update extension's version in both `manifest.json` and `settings.html`.
-2. ZIP all files under `/extension` directory.
-3. Upload zip to: https://chrome.google.com/webstore/developer/edit/epemkmimdjecaegobcafcblljdjjicpm
+2. Check `analytics.js` to be sure that the tracking code is valid.
+3. ZIP all files under `/extension` directory.
+4. Upload zip to: https://chrome.google.com/webstore/developer/edit/epemkmimdjecaegobcafcblljdjjicpm
