@@ -6,6 +6,17 @@ spk.events = spk.events || {};
 
 spk.events.createEvent = (function () {
 
+    /**
+     * Generates the entire web page for a specific GitHub section.
+     * @param repo It should be the repo's owner and the repo name, like: "barriosnahuel/spokesman".
+     * @param section The target section, like "releases".
+     * @param branch You know what.
+     * @returns {string} i.e.: https://github.com/barriosnahuel/spokesman/tree/develop
+     */
+    var buildRepoPage = function (repo, section, branch) {
+        return spk.properties.github_web + repo + '/' + section + '/' + branch;
+    };
+
     var parseGitHubEvent = function (event) {
         var result;
 
@@ -19,13 +30,13 @@ spk.events.createEvent = (function () {
             case 'tag':
                 result = {
                     branch: event.payload.ref
-                    , link: spk.properties.github_web + event.repo.name + '/releases/' + event.payload.ref
+                    , link: buildRepoPage(event.repo.name, 'releases', event.payload.ref)
                 };
                 break;
             case 'branch':
                 result = {
                     branch: event.payload.ref
-                    , link: spk.properties.github_web + event.repo.name + '/tree/' + event.payload.ref
+                    , link: buildRepoPage(event.repo.name, 'tree', event.payload.ref)
                 };
                 break;
             default:
