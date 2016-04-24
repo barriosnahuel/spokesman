@@ -96,3 +96,8 @@ Sizes:
 - https://www.jquery.com
 - https://www.jsviews.com
 - https://www.bootstraptoggle.com
+
+### Publish process
+1. Be sure to update extension's version in both `manifest.json` and `settings.html`.
+2. ZIP all files under `/extension` directory.
+3. Upload zip to: https://chrome.google.com/webstore/developer/edit/epemkmimdjecaegobcafcblljdjjicpm
