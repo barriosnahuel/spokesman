@@ -28,15 +28,10 @@ spk.events.createEvent = (function () {
                 };
                 break;
             case 'tag':
-                result = {
-                    branch: event.payload.ref
-                    , link: buildRepoPage(event.repo.name, 'releases', event.payload.ref)
-                };
-                break;
             case 'branch':
                 result = {
                     branch: event.payload.ref
-                    , link: buildRepoPage(event.repo.name, 'tree', event.payload.ref)
+                    , link: buildRepoPage(event.repo.name, event.payload.ref_type == 'tag' ? 'releases' : 'tree', event.payload.ref)
                 };
                 break;
             default:
