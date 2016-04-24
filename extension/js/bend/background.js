@@ -52,8 +52,8 @@ var spk = spk || {};
         });
     };
 
-    var processEvent = function (eachEvent) {
-        var dto = spk.events.manager.parse(eachEvent);
+    var processEvent = function (eachEvent, username) {
+        var dto = spk.events.manager.parse(eachEvent, username);
         var notification;
 
         if (dto && spk.events.manager.shouldProcess(dto)) {
@@ -209,7 +209,7 @@ var spk = spk || {};
                     for (var i = 0; i < mergedEvents.length; i++) {
                         var eachMergedEvent = mergedEvents[i];
 
-                        var notification = processEvent(eachMergedEvent);
+                        var notification = processEvent(eachMergedEvent, storage.username);
                         if (notification) {
                             notifications.push(notification);
                         }

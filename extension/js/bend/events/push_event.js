@@ -11,7 +11,7 @@ spk.events.pushEvent = (function () {
         return {
             commitsQuantity: event.payload.size
             , branch: branch
-            , link: 'https://github.com/' + event.repo.name + '/commits/' + branch
+            , link: spk.properties.github_web + event.repo.name + '/commits/' + branch
         };
     };
 

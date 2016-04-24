@@ -13,19 +13,19 @@ spk.events.createEvent = (function () {
             case 'repository':
                 result = {
                     description: event.payload.description
-                    , link: 'https://github.com/' + event.repo.name
+                    , link: spk.properties.github_web + event.repo.name
                 };
                 break;
             case 'tag':
                 result = {
                     branch: event.payload.ref
-                    , link: 'https://github.com/' + event.repo.name + '/releases/' + event.payload.ref
+                    , link: spk.properties.github_web + event.repo.name + '/releases/' + event.payload.ref
                 };
                 break;
             case 'branch':
                 result = {
                     branch: event.payload.ref
-                    , link: 'https://github.com/' + event.repo.name + '/tree/' + event.payload.ref
+                    , link: spk.properties.github_web + event.repo.name + '/tree/' + event.payload.ref
                 };
                 break;
             default:
