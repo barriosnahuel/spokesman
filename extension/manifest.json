@@ -43,6 +43,7 @@
             "js/bend/events/custom/custom_issues_events.js",
             "js/bend/events/custom/custom_pull_requests_events.js",
             "js/bend/api/lib.js",
+            "js/bend/ga.js",
             "js/bend/background.js"
         ],
         "persistent": false

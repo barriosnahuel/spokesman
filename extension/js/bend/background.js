@@ -72,6 +72,9 @@ var spk = spk || {};
                 chrome.tabs.create({
                     url: data[notificationId]
                 }, function () {
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-32410648-9']);
+                    _gaq.push(['_trackEvent', 'Events', 'Clicked', 'WatchEvent']);
                     chrome.notifications.clear(notificationId);
                 });
             }

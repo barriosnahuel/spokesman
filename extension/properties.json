@@ -1,5 +1,5 @@
 {
-    "testing": false,
+    "testing": true,
     "github_web": "https://github.com/",
     "push_branches": [
         "master",
@@ -14,39 +14,39 @@
     "supported_events": [
         {
             "event": "CommitCommentEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "CreateEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "DeleteEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "IssueCommentEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "IssuesEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "PullRequestEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "PullRequestReviewCommentEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "PushEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "ReleaseEvent",
-            "enabled": true
+            "enabled": false
         },
         {
             "event": "WatchEvent",
